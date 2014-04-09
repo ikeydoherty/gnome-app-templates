@@ -9,6 +9,7 @@ NULL =
 CLEANFILES =
 
 SUBDIRS = \
+	data \
 	src \
 	demo
 

@@ -33,6 +33,7 @@ int main(int argc, char **argv)
         GtkWidget *item = NULL;
         GtkWidget *content = NULL;
         GtkWidget *main_disp = NULL;
+        GtkWidget *scroller = NULL;
         gchar *label = NULL;
 
         gtk_init(&argc, &argv);
@@ -45,7 +46,16 @@ int main(int argc, char **argv)
         /* Set up our sidebar*/
         sidebar = sidebar_window_get_sidebar(SIDEBAR_WINDOW(app_win));
         list = gtk_list_box_new();
-        gtk_container_add(GTK_CONTAINER(sidebar), list);
+
+        /* Stick the list in a scrolled window */
+        scroller = gtk_scrolled_window_new(NULL, NULL);
+        /* With modern themes like Adwaita, there's only really one shadow type
+         * and it looks kinda fugly in headerbar'd apps */
+        gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scroller),
+                GTK_SHADOW_NONE);
+
+        gtk_container_add(GTK_CONTAINER(scroller), list);
+        gtk_container_add(GTK_CONTAINER(sidebar), scroller);
         gtk_revealer_set_reveal_child(GTK_REVEALER(sidebar), TRUE);
 
         /* Add some items to the sidebar */

@@ -29,6 +29,7 @@ struct _SidebarWindowPriv {
         GtkWidget *sidebar;
         GtkWidget *content;
         GtkSizeGroup *size_group;
+        const gchar *side_title;
 };
 
 G_DEFINE_TYPE_WITH_CODE(SidebarWindow, sidebar_window, GNOME_APP_WINDOW_TYPE, G_ADD_PRIVATE(SidebarWindow))
@@ -37,6 +38,23 @@ G_DEFINE_TYPE_WITH_CODE(SidebarWindow, sidebar_window, GNOME_APP_WINDOW_TYPE, G_
 static void sidebar_window_class_init(SidebarWindowClass *klass);
 static void sidebar_window_init(SidebarWindow *self);
 static void sidebar_window_dispose(GObject *object);
+
+static void sidebar_window_get_property(GObject *object,
+                                        guint prop_id,
+                                        GValue *value,
+                                        GParamSpec *pspec);
+
+static void sidebar_window_set_property(GObject *object,
+                                        guint prop_id,
+                                        const GValue *value,
+                                        GParamSpec *pspec);
+
+enum {
+        PROP_0, PROP_SIDEBAR_TITLE, N_PROPERTIES
+};
+static GParamSpec *obj_properties[N_PROPERTIES] = { NULL, };
+
+
 static void title_cb(GtkWidget *widget,
                     GParamSpec *param,
                     gpointer userdata);
@@ -54,8 +72,59 @@ static void sidebar_window_class_init(SidebarWindowClass *klass)
         GObjectClass *g_object_class;
 
         g_object_class = G_OBJECT_CLASS(klass);
+
+        obj_properties[PROP_SIDEBAR_TITLE] =
+        g_param_spec_string("side-title", "Side title", "Side title",
+                "Sidebar",
+                G_PARAM_READWRITE);
+
         g_object_class->dispose = &sidebar_window_dispose;
+        g_object_class->set_property = &sidebar_window_set_property;
+        g_object_class->get_property = &sidebar_window_get_property;
+        g_object_class_install_properties(g_object_class, N_PROPERTIES,
+                obj_properties);
 }
+
+static void sidebar_window_set_property(GObject *object,
+                                        guint prop_id,
+                                        const GValue *value,
+                                        GParamSpec *pspec)
+{
+        SidebarWindow *self;
+
+        self = SIDEBAR_WINDOW(object);
+        switch (prop_id) {
+                case PROP_SIDEBAR_TITLE:
+                        self->priv->side_title = g_value_get_string(value);
+                        gtk_header_bar_set_title(GTK_HEADER_BAR(self->priv->left_header),
+                                self->priv->side_title);
+                        break;
+                default:
+                        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                prop_id, pspec);
+                        break;
+        }
+}
+
+static void sidebar_window_get_property(GObject *object,
+                                        guint prop_id,
+                                        GValue *value,
+                                        GParamSpec *pspec)
+{
+        SidebarWindow *self;
+
+        self = SIDEBAR_WINDOW(object);
+        switch (prop_id) {
+                case PROP_SIDEBAR_TITLE:
+                        g_value_set_string(value, self->priv->side_title);
+                        break;
+                default:
+                        G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                prop_id, pspec);
+                        break;
+        }
+}
+
 
 static void sidebar_window_init(SidebarWindow *self)
 {

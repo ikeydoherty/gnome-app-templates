@@ -24,7 +24,7 @@
 #include "gnome-app-window.h"
 
 struct _GnomeAppWindowPriv {
-        gint x; /* Reserved */
+        GtkWidget *header;
 };
 
 G_DEFINE_TYPE_WITH_CODE(GnomeAppWindow, gnome_app_window, GTK_TYPE_WINDOW, G_ADD_PRIVATE(GnomeAppWindow))
@@ -45,8 +45,15 @@ static void gnome_app_window_class_init(GnomeAppWindowClass *klass)
 
 static void gnome_app_window_init(GnomeAppWindow *self)
 {
+        GtkWidget *header;
+
         self->priv = gnome_app_window_get_instance_private(self);
-        /* TODO: Implement. */
+
+        /* Set up headerbar */
+        header = gtk_header_bar_new();
+        gtk_window_set_titlebar(GTK_WINDOW(self), header);
+
+        self->priv->header = header;
 }
 
 static void gnome_app_window_dispose(GObject *object)

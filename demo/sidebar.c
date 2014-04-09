@@ -54,6 +54,10 @@ int main(int argc, char **argv)
                 g_free(label);
                 gtk_container_add(GTK_CONTAINER(list), item);
         }
+
+        /* Set sidebar title */
+        sidebar_window_set_title(SIDEBAR_WINDOW(app_win), "Sidebar thing");
+
         /* And show */
         gtk_widget_show_all(app_win);
 

@@ -1,5 +1,5 @@
 /*
- * simple.c
+ * sidebar.c
  * 
  * Copyright 2014 Ikey Doherty <ikey.doherty@gmail.com>
  * 

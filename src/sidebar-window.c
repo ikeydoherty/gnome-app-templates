@@ -146,8 +146,6 @@ static void sidebar_window_init(SidebarWindow *self)
         left_header = gtk_header_bar_new();
         gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(left_header), FALSE);
         style = gtk_widget_get_style_context(left_header);
-        /* TODO: Support side-title property! */
-        gtk_header_bar_set_title(GTK_HEADER_BAR(left_header), "Sidebar");
         gtk_style_context_add_class(style, "titlebar");
         gtk_style_context_add_class(style, "gat-titlebar-left");
         self->priv->left_header = left_header;

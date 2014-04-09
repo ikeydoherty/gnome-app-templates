@@ -29,7 +29,7 @@ struct _SidebarWindowPriv {
         GtkWidget *sidebar;
         GtkWidget *content;
         GtkSizeGroup *size_group;
-        const gchar *side_title;
+        gchar *side_title;
 };
 
 G_DEFINE_TYPE_WITH_CODE(SidebarWindow, sidebar_window, GNOME_APP_WINDOW_TYPE, G_ADD_PRIVATE(SidebarWindow))
@@ -95,7 +95,10 @@ static void sidebar_window_set_property(GObject *object,
         self = SIDEBAR_WINDOW(object);
         switch (prop_id) {
                 case PROP_SIDEBAR_TITLE:
-                        self->priv->side_title = g_value_get_string(value);
+                        if (self->priv->side_title) {
+                                g_free(self->priv->side_title);
+                        }
+                        self->priv->side_title = g_value_dup_string(value);
                         gtk_header_bar_set_title(GTK_HEADER_BAR(self->priv->left_header),
                                 self->priv->side_title);
                         break;
@@ -193,6 +196,13 @@ static void sidebar_window_init(SidebarWindow *self)
 
 static void sidebar_window_dispose(GObject *object)
 {
+        SidebarWindow *self = SIDEBAR_WINDOW(object);
+
+        if (self->priv->side_title) {
+                g_free(self->priv->side_title);
+                self->priv->side_title = NULL;
+        }
+
         /* Destruct */
         G_OBJECT_CLASS (sidebar_window_parent_class)->dispose (object);
 }
@@ -215,6 +225,16 @@ GtkWidget *sidebar_window_get_sidebar(SidebarWindow *self)
 GtkWidget *sidebar_window_get_content_area(SidebarWindow *self)
 {
         return self->priv->content;
+}
+
+void sidebar_window_set_title(SidebarWindow *self, const gchar *title)
+{
+        g_object_set(self, "side-title", title, NULL);
+}
+
+const gchar *sidebar_window_get_title(SidebarWindow *self)
+{
+        return (const gchar*)self->priv->side_title;
 }
 
 static void title_cb(GtkWidget *widget,

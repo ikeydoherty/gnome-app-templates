@@ -72,5 +72,16 @@ GtkWidget *sidebar_window_get_sidebar(SidebarWindow *self);
  */
 GtkWidget *sidebar_window_get_content_area(SidebarWindow *self);
 
+/**
+ * Update the sidebar title
+ * @param title The new sidebar title
+ */
+void sidebar_window_set_title(SidebarWindow *self, const gchar *title);
+
+/**
+ * Get the current sidebar title
+ * @return Current sidebar title
+ */
+const gchar *sidebar_window_get_title(SidebarWindow *self);
 
 #endif /* sidebar_window_h */

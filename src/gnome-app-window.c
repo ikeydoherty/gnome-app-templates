@@ -34,6 +34,8 @@ static void gnome_app_window_class_init(GnomeAppWindowClass *klass);
 static void gnome_app_window_init(GnomeAppWindow *self);
 static void gnome_app_window_dispose(GObject *object);
 
+static void init_styles(void);
+
 /* Initialisation */
 static void gnome_app_window_class_init(GnomeAppWindowClass *klass)
 {
@@ -55,6 +57,9 @@ static void gnome_app_window_init(GnomeAppWindow *self)
         gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(header), TRUE);
 
         self->priv->header = header;
+
+        /* Initialise styles */
+        init_styles();
 }
 
 static void gnome_app_window_dispose(GObject *object)
@@ -70,4 +75,23 @@ GtkWidget *gnome_app_window_new(void)
 
         self = g_object_new(GNOME_APP_WINDOW_TYPE, NULL);
         return GTK_WIDGET(self);
+}
+
+static void init_styles()
+{
+        GtkCssProvider *css_provider;
+        GFile *file = NULL;
+        GdkScreen *screen;
+
+        screen = gdk_screen_get_default();
+
+        css_provider = gtk_css_provider_new();
+        file = g_file_new_for_uri("resource://com/gmail/ikeydoherty/gat/style.css");
+        if (gtk_css_provider_load_from_file(css_provider, file, NULL)) {
+                gtk_style_context_add_provider_for_screen(screen,
+                        GTK_STYLE_PROVIDER(css_provider),
+                        GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        }
+        g_object_unref(css_provider);
+        g_object_unref(file);
 }

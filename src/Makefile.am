@@ -6,7 +6,9 @@ libgapptemplates_la_SOURCES = \
 	gnome-app-window.h \
 	gnome-app-window.c \
 	sidebar-window.c \
-	sidebar-window.h
+	sidebar-window.h \
+	../data/gat-resources.h \
+	../data/gat-resources.c
 
 libgapptemplates_la_CFLAGS = \
 	$(GTK3_CFLAGS) \

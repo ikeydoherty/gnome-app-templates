@@ -52,6 +52,7 @@ static void gnome_app_window_init(GnomeAppWindow *self)
         /* Set up headerbar */
         header = gtk_header_bar_new();
         gtk_window_set_titlebar(GTK_WINDOW(self), header);
+        gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(header), TRUE);
 
         self->priv->header = header;
 }

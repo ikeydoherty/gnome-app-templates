@@ -28,6 +28,10 @@
 int main(int argc, char **argv)
 {
         GtkWidget *app_win = NULL;
+        GtkWidget *sidebar = NULL;
+        GtkWidget *list = NULL;
+        GtkWidget *item = NULL;
+        gchar *label = NULL;
 
         gtk_init(&argc, &argv);
 
@@ -36,6 +40,20 @@ int main(int argc, char **argv)
         gtk_window_set_default_size(GTK_WINDOW(app_win), 500, 500);
         gtk_window_set_title(GTK_WINDOW(app_win), "SidebarWindow demonstration");
 
+        /* Set up our sidebar*/
+        sidebar = sidebar_window_get_sidebar(SIDEBAR_WINDOW(app_win));
+        list = gtk_list_box_new();
+        gtk_container_add(GTK_CONTAINER(sidebar), list);
+        gtk_revealer_set_reveal_child(GTK_REVEALER(sidebar), TRUE);
+
+        /* Add some items to the sidebar */
+        for (int i = 0; i < 10; i++) {
+                label = g_strdup_printf("<big>Item #%d</big>", i);
+                item = gtk_label_new(label);
+                gtk_label_set_use_markup(GTK_LABEL(item), TRUE);
+                g_free(label);
+                gtk_container_add(GTK_CONTAINER(list), item);
+        }
         /* And show */
         gtk_widget_show_all(app_win);
 

@@ -60,4 +60,17 @@ GType sidebar_window_get_type(void);
  */
 GtkWidget *sidebar_window_new(void);
 
+/**
+ * Get the sidebar widget
+ * @return the sidebar
+ */
+GtkWidget *sidebar_window_get_sidebar(SidebarWindow *self);
+
+/**
+ * Return the content area
+ * @return the content area
+ */
+GtkWidget *sidebar_window_get_content_area(SidebarWindow *self);
+
+
 #endif /* sidebar_window_h */

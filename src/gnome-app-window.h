@@ -56,6 +56,6 @@ GType gnome_app_window_get_type(void);
  * Construct a new GnomeAppWindow
  * @return A new GnomeAppWindow
  */
-GnomeAppWindow *gnome_app_window_new(void);
+GtkWidget *gnome_app_window_new(void);
 
 #endif /* gnome_app_window_h */

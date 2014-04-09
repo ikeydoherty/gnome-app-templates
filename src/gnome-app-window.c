@@ -63,10 +63,10 @@ static void gnome_app_window_dispose(GObject *object)
 }
 
 /* Utility; return a new GnomeAppWindow */
-GnomeAppWindow *gnome_app_window_new(void)
+GtkWidget *gnome_app_window_new(void)
 {
         GnomeAppWindow *self;
 
         self = g_object_new(GNOME_APP_WINDOW_TYPE, NULL);
-        return self;
+        return GTK_WIDGET(self);
 }

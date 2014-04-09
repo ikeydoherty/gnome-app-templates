@@ -24,6 +24,7 @@ AS_IF([test "x$enable_demos" = "xyes"],
 AM_CONDITIONAL([BUILD_DEMOS], [test x$enable_demos = x"yes"])
 
 AC_CONFIG_FILES(Makefile
-                src/Makefile)
+                src/Makefile
+		demo/Makefile)
 AC_OUTPUT
 

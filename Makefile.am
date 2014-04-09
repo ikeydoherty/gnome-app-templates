@@ -9,4 +9,6 @@ NULL =
 CLEANFILES =
 
 SUBDIRS = \
-	src
+	src \
+	demo
+

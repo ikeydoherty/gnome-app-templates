@@ -31,6 +31,8 @@ int main(int argc, char **argv)
         GtkWidget *sidebar = NULL;
         GtkWidget *list = NULL;
         GtkWidget *item = NULL;
+        GtkWidget *content = NULL;
+        GtkWidget *main_disp = NULL;
         gchar *label = NULL;
 
         gtk_init(&argc, &argv);
@@ -57,6 +59,12 @@ int main(int argc, char **argv)
 
         /* Set sidebar title */
         sidebar_window_set_title(SIDEBAR_WINDOW(app_win), "Sidebar thing");
+
+        /* And make use of the main content area */
+        content = sidebar_window_get_content_area(SIDEBAR_WINDOW(app_win));
+        main_disp = gtk_image_new_from_icon_name("start-here-symbolic", GTK_ICON_SIZE_INVALID);
+        gtk_image_set_pixel_size(GTK_IMAGE(main_disp), 256);
+        gtk_box_pack_start(GTK_BOX(content), main_disp, TRUE, TRUE, 0);
 
         /* And show */
         gtk_widget_show_all(app_win);

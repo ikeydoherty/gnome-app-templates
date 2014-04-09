@@ -4,7 +4,9 @@ lib_LTLIBRARIES = libgapptemplates.la
 
 libgapptemplates_la_SOURCES = \
 	gnome-app-window.h \
-	gnome-app-window.c
+	gnome-app-window.c \
+	sidebar-window.c \
+	sidebar-window.h
 
 libgapptemplates_la_CFLAGS = \
 	$(GTK3_CFLAGS) \

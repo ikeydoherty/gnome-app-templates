@@ -34,6 +34,9 @@ G_DEFINE_TYPE_WITH_CODE(SidebarWindow, sidebar_window, GNOME_APP_WINDOW_TYPE, G_
 static void sidebar_window_class_init(SidebarWindowClass *klass);
 static void sidebar_window_init(SidebarWindow *self);
 static void sidebar_window_dispose(GObject *object);
+static void title_cb(GtkWidget *widget,
+                    GParamSpec *param,
+                    gpointer userdata);
 
 /* Initialisation */
 static void sidebar_window_class_init(SidebarWindowClass *klass)
@@ -71,6 +74,9 @@ static void sidebar_window_init(SidebarWindow *self)
         gtk_box_pack_start(GTK_BOX(header), left_header, FALSE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(header), right_header, TRUE, TRUE, 0);
         gtk_window_set_titlebar(GTK_WINDOW(self), header);
+
+        /* Ensure we're notified when the title changes */
+        g_signal_connect(self, "notify::title", G_CALLBACK(title_cb), NULL);
 }
 
 static void sidebar_window_dispose(GObject *object)
@@ -86,4 +92,16 @@ GtkWidget *sidebar_window_new(void)
 
         self = g_object_new(SIDEBAR_WINDOW_TYPE, NULL);
         return GTK_WIDGET(self);
+}
+
+static void title_cb(GtkWidget *widget,
+                     GParamSpec *param,
+                     gpointer userdata)
+{
+        SidebarWindow *self = SIDEBAR_WINDOW(widget);
+        /* We only get called when the title changes */
+        const gchar *title = gtk_window_get_title(GTK_WINDOW(widget));
+
+        gtk_header_bar_set_title(GTK_HEADER_BAR(self->priv->right_header),
+                title);
 }

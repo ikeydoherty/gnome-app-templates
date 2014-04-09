@@ -1,0 +1,13 @@
+/**
+ * As seen in gnome-tweak-tool, credit goes to Yosef Or Boczko and
+ * John Stowers
+ */
+.gat-titlebar-left:dir(ltr),
+.gat-titlebar-right:dir(rtl) {
+    border-top-right-radius: 0;
+}
+
+.gat-titlebar-right:dir(ltr),
+.gat-titlebar-left:dir(rtl) {
+    border-top-left-radius: 0;
+}

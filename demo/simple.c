@@ -31,10 +31,10 @@ int main(int argc, char **argv)
 
         gtk_init(&argc, &argv);
 
-        app_win = gnome_app_window_new();
+        app_win = gat_gnome_app_window_new();
         g_signal_connect(app_win, "delete-event", gtk_main_quit, NULL);
         gtk_window_set_default_size(GTK_WINDOW(app_win), 500, 500);
-        gtk_window_set_title(GTK_WINDOW(app_win), "GnomeAppWindow demonstration");
+        gtk_window_set_title(GTK_WINDOW(app_win), "GatGnomeAppWindow demonstration");
 
         /* And show */
         gtk_widget_show_all(app_win);

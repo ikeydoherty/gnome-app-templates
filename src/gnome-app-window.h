@@ -20,42 +20,42 @@
  * 
  * 
  */
-#ifndef gnome_app_window_h
-#define gnome_app_window_h
+#ifndef gat_gnome_app_window_h
+#define gat_gnome_app_window_h
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-typedef struct _GnomeAppWindow GnomeAppWindow;
-typedef struct _GnomeAppWindowClass   GnomeAppWindowClass;
-typedef struct _GnomeAppWindowPriv GnomeAppWindowPrivate;
+typedef struct _GatGnomeAppWindow GatGnomeAppWindow;
+typedef struct _GatGnomeAppWindowClass   GatGnomeAppWindowClass;
+typedef struct _GatGnomeAppWindowPriv GatGnomeAppWindowPrivate;
 
-#define GNOME_APP_WINDOW_TYPE (gnome_app_window_get_type())
-#define GNOME_APP_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GNOME_APP_WINDOW_TYPE, GnomeAppWindow))
-#define IS_GNOME_APP_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GNOME_APP_WINDOW_TYPE))
-#define GNOME_APP_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GNOME_APP_WINDOW_TYPE, GnomeAppWindowClass))
-#define IS_GNOME_APP_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GNOME_APP_WINDOW_TYPE))
-#define GNOME_APP_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GNOME_APP_WINDOW_TYPE, GnomeAppWindowClass))
+#define GAT_GNOME_APP_WINDOW_TYPE (gat_gnome_app_window_get_type())
+#define GAT_GNOME_APP_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GAT_GNOME_APP_WINDOW_TYPE, GatGnomeAppWindow))
+#define GAT_IS_GNOME_APP_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GAT_GNOME_APP_WINDOW_TYPE))
+#define GAT_GNOME_APP_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GAT_GNOME_APP_WINDOW_TYPE, GatGnomeAppWindowClass))
+#define GAT_IS_GNOME_APP_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GAT_GNOME_APP_WINDOW_TYPE))
+#define GAT_GNOME_APP_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GAT_GNOME_APP_WINDOW_TYPE, GatGnomeAppWindowClass))
 
-/* GnomeAppWindow object */
-struct _GnomeAppWindow {
+/* GatGnomeAppWindow object */
+struct _GatGnomeAppWindow {
         GtkWindow parent;
-        GnomeAppWindowPrivate *priv;
+        GatGnomeAppWindowPrivate *priv;
 };
 
-/* GnomeAppWindow class definition */
-struct _GnomeAppWindowClass {
+/* GatGnomeAppWindow class definition */
+struct _GatGnomeAppWindowClass {
         GtkWindowClass parent_class;
 };
 
-GType gnome_app_window_get_type(void);
+GType gat_gnome_app_window_get_type(void);
 
-/* GnomeAppWindow methods */
+/* GatGnomeAppWindow methods */
 
 /**
- * Construct a new GnomeAppWindow
- * @return A new GnomeAppWindow
+ * Construct a new GatGnomeAppWindow
+ * @return A new GatGnomeAppWindow
  */
-GtkWidget *gnome_app_window_new(void);
+GtkWidget *gat_gnome_app_window_new(void);
 
-#endif /* gnome_app_window_h */
+#endif /* gat_gnome_app_window_h */

@@ -23,33 +23,33 @@
 
 #include "gnome-app-window.h"
 
-struct _GnomeAppWindowPriv {
+struct _GatGnomeAppWindowPriv {
         GtkWidget *header;
 };
 
-G_DEFINE_TYPE_WITH_CODE(GnomeAppWindow, gnome_app_window, GTK_TYPE_WINDOW, G_ADD_PRIVATE(GnomeAppWindow))
+G_DEFINE_TYPE_WITH_CODE(GatGnomeAppWindow, gat_gnome_app_window, GTK_TYPE_WINDOW, G_ADD_PRIVATE(GatGnomeAppWindow))
 
 /* Boilerplate GObject code */
-static void gnome_app_window_class_init(GnomeAppWindowClass *klass);
-static void gnome_app_window_init(GnomeAppWindow *self);
-static void gnome_app_window_dispose(GObject *object);
+static void gat_gnome_app_window_class_init(GatGnomeAppWindowClass *klass);
+static void gat_gnome_app_window_init(GatGnomeAppWindow *self);
+static void gat_gnome_app_window_dispose(GObject *object);
 
 static void init_styles(void);
 
 /* Initialisation */
-static void gnome_app_window_class_init(GnomeAppWindowClass *klass)
+static void gat_gnome_app_window_class_init(GatGnomeAppWindowClass *klass)
 {
         GObjectClass *g_object_class;
 
         g_object_class = G_OBJECT_CLASS(klass);
-        g_object_class->dispose = &gnome_app_window_dispose;
+        g_object_class->dispose = &gat_gnome_app_window_dispose;
 }
 
-static void gnome_app_window_init(GnomeAppWindow *self)
+static void gat_gnome_app_window_init(GatGnomeAppWindow *self)
 {
         GtkWidget *header;
 
-        self->priv = gnome_app_window_get_instance_private(self);
+        self->priv = gat_gnome_app_window_get_instance_private(self);
 
         /* Set up headerbar */
         header = gtk_header_bar_new();
@@ -62,18 +62,18 @@ static void gnome_app_window_init(GnomeAppWindow *self)
         init_styles();
 }
 
-static void gnome_app_window_dispose(GObject *object)
+static void gat_gnome_app_window_dispose(GObject *object)
 {
         /* Destruct */
-        G_OBJECT_CLASS (gnome_app_window_parent_class)->dispose (object);
+        G_OBJECT_CLASS (gat_gnome_app_window_parent_class)->dispose (object);
 }
 
-/* Utility; return a new GnomeAppWindow */
-GtkWidget *gnome_app_window_new(void)
+/* Utility; return a new GatGnomeAppWindow */
+GtkWidget *gat_gnome_app_window_new(void)
 {
-        GnomeAppWindow *self;
+        GatGnomeAppWindow *self;
 
-        self = g_object_new(GNOME_APP_WINDOW_TYPE, NULL);
+        self = g_object_new(GAT_GNOME_APP_WINDOW_TYPE, NULL);
         return GTK_WIDGET(self);
 }
 

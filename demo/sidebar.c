@@ -38,13 +38,13 @@ int main(int argc, char **argv)
 
         gtk_init(&argc, &argv);
 
-        app_win = sidebar_window_new();
+        app_win = gat_sidebar_window_new();
         g_signal_connect(app_win, "delete-event", gtk_main_quit, NULL);
         gtk_window_set_default_size(GTK_WINDOW(app_win), 500, 500);
-        gtk_window_set_title(GTK_WINDOW(app_win), "SidebarWindow demonstration");
+        gtk_window_set_title(GTK_WINDOW(app_win), "GatSidebarWindow demonstration");
 
         /* Set up our sidebar*/
-        sidebar = sidebar_window_get_sidebar(SIDEBAR_WINDOW(app_win));
+        sidebar = gat_sidebar_window_get_sidebar(GAT_SIDEBAR_WINDOW(app_win));
         list = gtk_list_box_new();
 
         /* Stick the list in a scrolled window */
@@ -68,10 +68,10 @@ int main(int argc, char **argv)
         }
 
         /* Set sidebar title */
-        sidebar_window_set_title(SIDEBAR_WINDOW(app_win), "Sidebar thing");
+        gat_sidebar_window_set_title(GAT_SIDEBAR_WINDOW(app_win), "Sidebar thing");
 
         /* And make use of the main content area */
-        content = sidebar_window_get_content_area(SIDEBAR_WINDOW(app_win));
+        content = gat_sidebar_window_get_content_area(GAT_SIDEBAR_WINDOW(app_win));
         main_disp = gtk_image_new_from_icon_name("start-here-symbolic", GTK_ICON_SIZE_INVALID);
         gtk_image_set_pixel_size(GTK_IMAGE(main_disp), 256);
         gtk_box_pack_start(GTK_BOX(content), main_disp, TRUE, TRUE, 0);

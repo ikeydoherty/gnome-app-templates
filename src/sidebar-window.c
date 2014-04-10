@@ -23,7 +23,7 @@
 
 #include "sidebar-window.h"
 
-struct _SidebarWindowPriv {
+struct _GatSidebarWindowPriv {
         GtkWidget *left_header;
         GtkWidget *right_header;
         GtkWidget *sidebar;
@@ -32,19 +32,19 @@ struct _SidebarWindowPriv {
         gchar *side_title;
 };
 
-G_DEFINE_TYPE_WITH_CODE(SidebarWindow, sidebar_window, GNOME_APP_WINDOW_TYPE, G_ADD_PRIVATE(SidebarWindow))
+G_DEFINE_TYPE_WITH_CODE(GatSidebarWindow, gat_sidebar_window, GAT_GNOME_APP_WINDOW_TYPE, G_ADD_PRIVATE(GatSidebarWindow))
 
 /* Boilerplate GObject code */
-static void sidebar_window_class_init(SidebarWindowClass *klass);
-static void sidebar_window_init(SidebarWindow *self);
-static void sidebar_window_dispose(GObject *object);
+static void gat_sidebar_window_class_init(GatSidebarWindowClass *klass);
+static void gat_sidebar_window_init(GatSidebarWindow *self);
+static void gat_sidebar_window_dispose(GObject *object);
 
-static void sidebar_window_get_property(GObject *object,
+static void gat_sidebar_window_get_property(GObject *object,
                                         guint prop_id,
                                         GValue *value,
                                         GParamSpec *pspec);
 
-static void sidebar_window_set_property(GObject *object,
+static void gat_sidebar_window_set_property(GObject *object,
                                         guint prop_id,
                                         const GValue *value,
                                         GParamSpec *pspec);
@@ -67,7 +67,7 @@ static void container_remove_cb(GtkWidget *container,
                                 gpointer userdata);
 
 /* Initialisation */
-static void sidebar_window_class_init(SidebarWindowClass *klass)
+static void gat_sidebar_window_class_init(GatSidebarWindowClass *klass)
 {
         GObjectClass *g_object_class;
 
@@ -78,21 +78,21 @@ static void sidebar_window_class_init(SidebarWindowClass *klass)
                 "Sidebar",
                 G_PARAM_READWRITE);
 
-        g_object_class->dispose = &sidebar_window_dispose;
-        g_object_class->set_property = &sidebar_window_set_property;
-        g_object_class->get_property = &sidebar_window_get_property;
+        g_object_class->dispose = &gat_sidebar_window_dispose;
+        g_object_class->set_property = &gat_sidebar_window_set_property;
+        g_object_class->get_property = &gat_sidebar_window_get_property;
         g_object_class_install_properties(g_object_class, N_PROPERTIES,
                 obj_properties);
 }
 
-static void sidebar_window_set_property(GObject *object,
+static void gat_sidebar_window_set_property(GObject *object,
                                         guint prop_id,
                                         const GValue *value,
                                         GParamSpec *pspec)
 {
-        SidebarWindow *self;
+        GatSidebarWindow *self;
 
-        self = SIDEBAR_WINDOW(object);
+        self = GAT_SIDEBAR_WINDOW(object);
         switch (prop_id) {
                 case PROP_SIDEBAR_TITLE:
                         if (self->priv->side_title) {
@@ -109,14 +109,14 @@ static void sidebar_window_set_property(GObject *object,
         }
 }
 
-static void sidebar_window_get_property(GObject *object,
+static void gat_sidebar_window_get_property(GObject *object,
                                         guint prop_id,
                                         GValue *value,
                                         GParamSpec *pspec)
 {
-        SidebarWindow *self;
+        GatSidebarWindow *self;
 
-        self = SIDEBAR_WINDOW(object);
+        self = GAT_SIDEBAR_WINDOW(object);
         switch (prop_id) {
                 case PROP_SIDEBAR_TITLE:
                         g_value_set_string(value, self->priv->side_title);
@@ -129,7 +129,7 @@ static void sidebar_window_get_property(GObject *object,
 }
 
 
-static void sidebar_window_init(SidebarWindow *self)
+static void gat_sidebar_window_init(GatSidebarWindow *self)
 {
         GtkWidget *left_header, *right_header;
         GtkWidget *header;
@@ -140,7 +140,7 @@ static void sidebar_window_init(SidebarWindow *self)
         GtkWidget *sep;
         GtkStyleContext *style;
 
-        self->priv = sidebar_window_get_instance_private(self);
+        self->priv = gat_sidebar_window_get_instance_private(self);
 
         /* Left hand side */
         left_header = gtk_header_bar_new();
@@ -192,9 +192,9 @@ static void sidebar_window_init(SidebarWindow *self)
         self->priv->size_group = size;
 }
 
-static void sidebar_window_dispose(GObject *object)
+static void gat_sidebar_window_dispose(GObject *object)
 {
-        SidebarWindow *self = SIDEBAR_WINDOW(object);
+        GatSidebarWindow *self = GAT_SIDEBAR_WINDOW(object);
 
         if (self->priv->side_title) {
                 g_free(self->priv->side_title);
@@ -202,35 +202,35 @@ static void sidebar_window_dispose(GObject *object)
         }
 
         /* Destruct */
-        G_OBJECT_CLASS (sidebar_window_parent_class)->dispose (object);
+        G_OBJECT_CLASS (gat_sidebar_window_parent_class)->dispose (object);
 }
 
-/* Utility; return a new SidebarWindow */
-GtkWidget *sidebar_window_new(void)
+/* Utility; return a new GatSidebarWindow */
+GtkWidget *gat_sidebar_window_new(void)
 {
-        SidebarWindow *self;
+        GatSidebarWindow *self;
 
-        self = g_object_new(SIDEBAR_WINDOW_TYPE, NULL);
+        self = g_object_new(GAT_SIDEBAR_WINDOW_TYPE, NULL);
         return GTK_WIDGET(self);
 }
 
 
-GtkWidget *sidebar_window_get_sidebar(SidebarWindow *self)
+GtkWidget *gat_sidebar_window_get_sidebar(GatSidebarWindow *self)
 {
         return self->priv->sidebar;
 }
 
-GtkWidget *sidebar_window_get_content_area(SidebarWindow *self)
+GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self)
 {
         return self->priv->content;
 }
 
-void sidebar_window_set_title(SidebarWindow *self, const gchar *title)
+void gat_sidebar_window_set_title(GatSidebarWindow *self, const gchar *title)
 {
         g_object_set(self, "side-title", title, NULL);
 }
 
-const gchar *sidebar_window_get_title(SidebarWindow *self)
+const gchar *gat_sidebar_window_get_title(GatSidebarWindow *self)
 {
         return (const gchar*)self->priv->side_title;
 }
@@ -239,7 +239,7 @@ static void title_cb(GtkWidget *widget,
                      GParamSpec *param,
                      gpointer userdata)
 {
-        SidebarWindow *self = SIDEBAR_WINDOW(widget);
+        GatSidebarWindow *self = GAT_SIDEBAR_WINDOW(widget);
         /* We only get called when the title changes */
         const gchar *title = gtk_window_get_title(GTK_WINDOW(widget));
 
@@ -251,7 +251,7 @@ static void container_add_cb(GtkWidget *container,
                              GtkWidget *child,
                              gpointer userdata)
 {
-        SidebarWindow *self = SIDEBAR_WINDOW(userdata);
+        GatSidebarWindow *self = GAT_SIDEBAR_WINDOW(userdata);
         gtk_size_group_add_widget(self->priv->size_group, child);
 }
 
@@ -259,6 +259,6 @@ static void container_remove_cb(GtkWidget *container,
                                 GtkWidget *child,
                                 gpointer userdata)
 {
-        SidebarWindow *self = SIDEBAR_WINDOW(userdata);
+        GatSidebarWindow *self = GAT_SIDEBAR_WINDOW(userdata);
         gtk_size_group_remove_widget(self->priv->size_group, child);
 }

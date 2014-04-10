@@ -20,68 +20,68 @@
  * 
  * 
  */
-#ifndef sidebar_window_h
-#define sidebar_window_h
+#ifndef gat_sidebar_window_h
+#define gat_sidebar_window_h
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
 #include "gnome-app-window.h"
 
-typedef struct _SidebarWindow SidebarWindow;
-typedef struct _SidebarWindowClass   SidebarWindowClass;
-typedef struct _SidebarWindowPriv SidebarWindowPrivate;
+typedef struct _GatSidebarWindow GatSidebarWindow;
+typedef struct _GatSidebarWindowClass   GatSidebarWindowClass;
+typedef struct _GatSidebarWindowPriv GatSidebarWindowPrivate;
 
-#define SIDEBAR_WINDOW_TYPE (sidebar_window_get_type())
-#define SIDEBAR_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), SIDEBAR_WINDOW_TYPE, SidebarWindow))
-#define IS_SIDEBAR_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), SIDEBAR_WINDOW_TYPE))
-#define SIDEBAR_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), SIDEBAR_WINDOW_TYPE, SidebarWindowClass))
-#define IS_SIDEBAR_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), SIDEBAR_WINDOW_TYPE))
-#define SIDEBAR_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), SIDEBAR_WINDOW_TYPE, SidebarWindowClass))
+#define GAT_SIDEBAR_WINDOW_TYPE (gat_sidebar_window_get_type())
+#define GAT_SIDEBAR_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindow))
+#define GAT_IS_SIDEBAR_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GAT_SIDEBAR_WINDOW_TYPE))
+#define GAT_SIDEBAR_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindowClass))
+#define GAT_IS_SIDEBAR_WINDOW_CLASS(klass)       (G_TYPE_CHECK_CLASS_TYPE ((klass), GAT_SIDEBAR_WINDOW_TYPE))
+#define GAT_SIDEBAR_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindowClass))
 
-/* SidebarWindow object */
-struct _SidebarWindow {
-        GnomeAppWindow parent;
-        SidebarWindowPrivate *priv;
+/* GatSidebarWindow object */
+struct _GatSidebarWindow {
+        GatGnomeAppWindow parent;
+        GatSidebarWindowPrivate *priv;
 };
 
-/* SidebarWindow class definition */
-struct _SidebarWindowClass {
-        GnomeAppWindowClass parent_class;
+/* GatSidebarWindow class definition */
+struct _GatSidebarWindowClass {
+        GatGnomeAppWindowClass parent_class;
 };
 
-GType sidebar_window_get_type(void);
+GType gat_sidebar_window_get_type(void);
 
-/* SidebarWindow methods */
+/* GatSidebarWindow methods */
 
 /**
- * Construct a new SidebarWindow
- * @return A new SidebarWindow
+ * Construct a new GatSidebarWindow
+ * @return A new GatSidebarWindow
  */
-GtkWidget *sidebar_window_new(void);
+GtkWidget *gat_sidebar_window_new(void);
 
 /**
  * Get the sidebar widget
  * @return the sidebar
  */
-GtkWidget *sidebar_window_get_sidebar(SidebarWindow *self);
+GtkWidget *gat_sidebar_window_get_sidebar(GatSidebarWindow *self);
 
 /**
  * Return the content area
  * @return the content area
  */
-GtkWidget *sidebar_window_get_content_area(SidebarWindow *self);
+GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self);
 
 /**
  * Update the sidebar title
  * @param title The new sidebar title
  */
-void sidebar_window_set_title(SidebarWindow *self, const gchar *title);
+void gat_sidebar_window_set_title(GatSidebarWindow *self, const gchar *title);
 
 /**
  * Get the current sidebar title
  * @return Current sidebar title
  */
-const gchar *sidebar_window_get_title(SidebarWindow *self);
+const gchar *gat_sidebar_window_get_title(GatSidebarWindow *self);
 
-#endif /* sidebar_window_h */
+#endif /* gat_sidebar_window_h */

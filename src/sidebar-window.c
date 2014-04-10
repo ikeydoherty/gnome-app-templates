@@ -230,7 +230,7 @@ void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *t
         g_object_set(self, "side-title", title, NULL);
 }
 
-const gchar *get_sidebar_window_get_sidebar_title(GatSidebarWindow *self)
+const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *self)
 {
         return (const gchar*)self->priv->side_title;
 }

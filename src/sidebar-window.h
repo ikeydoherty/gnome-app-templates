@@ -52,36 +52,48 @@ struct _GatSidebarWindowClass {
 
 GType gat_sidebar_window_get_type(void);
 
-/* GatSidebarWindow methods */
-
 /**
+ * gat_sidebar_window_new:
+ * 
  * Construct a new GatSidebarWindow
- * @return A new GatSidebarWindow
+ *
+ * Returns: (transfer full): a new GatSidebarWindow
  */
 GtkWidget *gat_sidebar_window_new(void);
 
 /**
- * Get the sidebar widget
- * @return the sidebar
+ * gat_sidebar_window_get_sidebar:
+ * @self: A GatSidebarWindow
+ * 
+ * Returns: (transfer none): the sidebar
  */
 GtkWidget *gat_sidebar_window_get_sidebar(GatSidebarWindow *self);
 
 /**
- * Return the content area
- * @return the content area
+ * gat_sidebar_window_get_content_area:
+ * @self: A GatSidebarWindow
+ * 
+ * Returns: (transfer none): content area
  */
 GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self);
 
 /**
+ * gat_sidebar_window_set_sidebar_title:
+ * @self: A GatSidebarWindow
+ * @title: The new sidebar title
+ *
  * Update the sidebar title
- * @param title The new sidebar title
  */
 void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *title);
 
 /**
+ * gat_sidebar_window_get_sidebar_title:
+ * @self: A GatSidebarWindow
+ * 
  * Get the current sidebar title
- * @return Current sidebar title
+ *
+ * Returns: (transfer none): Current sidebar title
  */
-const gchar *get_sidebar_window_get_sidebar_title(GatSidebarWindow *self);
+const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *self);
 
 #endif /* gat_sidebar_window_h */

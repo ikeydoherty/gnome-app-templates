@@ -76,12 +76,12 @@ GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self);
  * Update the sidebar title
  * @param title The new sidebar title
  */
-void gat_sidebar_window_set_title(GatSidebarWindow *self, const gchar *title);
+void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *title);
 
 /**
  * Get the current sidebar title
  * @return Current sidebar title
  */
-const gchar *gat_sidebar_window_get_title(GatSidebarWindow *self);
+const gchar *get_sidebar_window_get_sidebar_title(GatSidebarWindow *self);
 
 #endif /* gat_sidebar_window_h */

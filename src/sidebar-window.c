@@ -225,12 +225,12 @@ GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self)
         return self->priv->content;
 }
 
-void gat_sidebar_window_set_title(GatSidebarWindow *self, const gchar *title)
+void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *title)
 {
         g_object_set(self, "side-title", title, NULL);
 }
 
-const gchar *gat_sidebar_window_get_title(GatSidebarWindow *self)
+const gchar *get_sidebar_window_get_sidebar_title(GatSidebarWindow *self)
 {
         return (const gchar*)self->priv->side_title;
 }

@@ -68,7 +68,7 @@ int main(int argc, char **argv)
         }
 
         /* Set sidebar title */
-        gat_sidebar_window_set_title(GAT_SIDEBAR_WINDOW(app_win), "Sidebar thing");
+        gat_sidebar_window_set_sidebar_title(GAT_SIDEBAR_WINDOW(app_win), "Sidebar thing");
 
         /* And make use of the main content area */
         content = gat_sidebar_window_get_content_area(GAT_SIDEBAR_WINDOW(app_win));

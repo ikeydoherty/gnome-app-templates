@@ -60,4 +60,21 @@ GType gat_sidebar_get_type(void);
  */
 GtkWidget *gat_sidebar_new(void);
 
+/**
+ * gat_sidebar_set_stack:
+ * @sidebar A GatSidebar
+ * @stack a GtkStack
+ *
+ * Set the stack associated with this GatSidebar
+ */
+void gat_sidebar_set_stack(GatSidebar *sidebar, GtkStack *stack);
+
+/**
+ * gat_sidebar_get_stack:
+ * @sidebar A GatSidebar
+ *
+ * Returns: (transfer full): the associated GtkStack
+ */
+GtkStack *gat_sidebar_get_stack(GatSidebar *sidebar);
+
 #endif /* gat_sidebar_h */

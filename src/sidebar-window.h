@@ -63,37 +63,37 @@ GtkWidget *gat_sidebar_window_new(void);
 
 /**
  * gat_sidebar_window_get_sidebar:
- * @self: A GatSidebarWindow
+ * @window: A GatSidebarWindow
  * 
  * Returns: (transfer none): the sidebar
  */
-GtkWidget *gat_sidebar_window_get_sidebar(GatSidebarWindow *self);
+GtkWidget *gat_sidebar_window_get_sidebar(GatSidebarWindow *window);
 
 /**
  * gat_sidebar_window_get_content_area:
- * @self: A GatSidebarWindow
+ * @window: A GatSidebarWindow
  * 
  * Returns: (transfer none): content area
  */
-GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self);
+GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *window);
 
 /**
  * gat_sidebar_window_set_sidebar_title:
- * @self: A GatSidebarWindow
+ * @window: A GatSidebarWindow
  * @title: The new sidebar title
  *
  * Update the sidebar title
  */
-void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *title);
+void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *window, const gchar *title);
 
 /**
  * gat_sidebar_window_get_sidebar_title:
- * @self: A GatSidebarWindow
+ * @window: A GatSidebarWindow
  * 
  * Get the current sidebar title
  *
  * Returns: (transfer none): Current sidebar title
  */
-const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *self);
+const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *window);
 
 #endif /* gat_sidebar_window_h */

@@ -11,5 +11,6 @@ CLEANFILES =
 SUBDIRS = \
 	data \
 	src \
-	demo
+	demo \
+	docs
 

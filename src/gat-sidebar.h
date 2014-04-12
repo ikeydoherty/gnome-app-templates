@@ -30,7 +30,9 @@ typedef struct _GatSidebar GatSidebar;
 typedef struct _GatSidebarClass   GatSidebarClass;
 typedef struct _GatSidebarPriv GatSidebarPrivate;
 
+#ifndef __GTK_DOC_IGNORE__
 #define GAT_SIDEBAR_TYPE (gat_sidebar_get_type())
+#endif
 #define GAT_SIDEBAR(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GAT_SIDEBAR_TYPE, GatSidebar))
 #define GAT_IS_SIDEBAR(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GAT_SIDEBAR_TYPE))
 #define GAT_SIDEBAR_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GAT_SIDEBAR_TYPE, GatSidebarClass))
@@ -54,6 +56,7 @@ GType gat_sidebar_get_type(void);
 
 /**
  * gat_sidebar_new:
+ *
  * Construct a new GatSidebar
  * 
  * Returns: (transfer full): a new GatSidebar
@@ -62,8 +65,8 @@ GtkWidget *gat_sidebar_new(void);
 
 /**
  * gat_sidebar_set_stack:
- * @sidebar A GatSidebar
- * @stack a GtkStack
+ * @sidebar: A GatSidebar
+ * @stack: a GtkStack
  *
  * Set the stack associated with this GatSidebar
  */
@@ -71,7 +74,7 @@ void gat_sidebar_set_stack(GatSidebar *sidebar, GtkStack *stack);
 
 /**
  * gat_sidebar_get_stack:
- * @sidebar A GatSidebar
+ * @sidebar: A GatSidebar
  *
  * Returns: (transfer full): the associated GtkStack
  */

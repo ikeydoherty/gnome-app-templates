@@ -12,9 +12,17 @@ LT_INIT([disable-static])
 PKG_CHECK_MODULES([GOBJECT], [gobject-2.0 >= 2.38.0])
 PKG_CHECK_MODULES([GTK3], [gtk+-3.0 >= 3.10.0])
 
-AC_CONFIG_MACRO_DIR([m4])
 
 GOBJECT_INTROSPECTION_CHECK([1.38.0])
+
+# check for gtk-doc
+m4_ifdef([GTK_DOC_CHECK], [
+GTK_DOC_CHECK([1.14],[--flavour no-tmpl])
+],[
+AM_CONDITIONAL([ENABLE_GTK_DOC], false)
+])
+
+AC_CONFIG_MACRO_DIR([m4])
 
 AC_ARG_ENABLE(demos, AS_HELP_STRING([--enable-demos], [enable demos @<:@default=no@:>@]),
 	      [], [enable_demos=no])
@@ -26,6 +34,7 @@ AM_CONDITIONAL([BUILD_DEMOS], [test x$enable_demos = x"yes"])
 AC_CONFIG_FILES(Makefile
 		data/Makefile
                 src/Makefile
-		demo/Makefile)
+		demo/Makefile
+		docs/Makefile)
 AC_OUTPUT
 

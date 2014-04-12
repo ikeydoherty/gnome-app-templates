@@ -30,7 +30,9 @@ typedef struct _GatGnomeAppWindow GatGnomeAppWindow;
 typedef struct _GatGnomeAppWindowClass   GatGnomeAppWindowClass;
 typedef struct _GatGnomeAppWindowPriv GatGnomeAppWindowPrivate;
 
+#ifndef __GTK_DOC_IGNORE__
 #define GAT_GNOME_APP_WINDOW_TYPE (gat_gnome_app_window_get_type())
+#endif
 #define GAT_GNOME_APP_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GAT_GNOME_APP_WINDOW_TYPE, GatGnomeAppWindow))
 #define GAT_IS_GNOME_APP_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GAT_GNOME_APP_WINDOW_TYPE))
 #define GAT_GNOME_APP_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GAT_GNOME_APP_WINDOW_TYPE, GatGnomeAppWindowClass))

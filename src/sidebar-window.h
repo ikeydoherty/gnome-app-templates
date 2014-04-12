@@ -32,7 +32,9 @@ typedef struct _GatSidebarWindow GatSidebarWindow;
 typedef struct _GatSidebarWindowClass   GatSidebarWindowClass;
 typedef struct _GatSidebarWindowPriv GatSidebarWindowPrivate;
 
+#ifndef __GTK_DOC_IGNORE__
 #define GAT_SIDEBAR_WINDOW_TYPE (gat_sidebar_window_get_type())
+#endif
 #define GAT_SIDEBAR_WINDOW(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindow))
 #define GAT_IS_SIDEBAR_WINDOW(obj)               (G_TYPE_CHECK_INSTANCE_TYPE ((obj), GAT_SIDEBAR_WINDOW_TYPE))
 #define GAT_SIDEBAR_WINDOW_CLASS(klass)          (G_TYPE_CHECK_CLASS_CAST ((klass), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindowClass))

@@ -53,8 +53,11 @@ GType gat_gnome_app_window_get_type(void);
 /* GatGnomeAppWindow methods */
 
 /**
+ * gat_gnome_app_window_new:
+ *
  * Construct a new GatGnomeAppWindow
- * @return A new GatGnomeAppWindow
+ *
+ * Returns: (transfer full): a new GatGnomeAppWindow
  */
 GtkWidget *gat_gnome_app_window_new(void);
 

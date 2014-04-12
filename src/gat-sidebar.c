@@ -45,6 +45,9 @@ static void gat_sidebar_class_init(GatSidebarClass *klass)
 
 static void gat_sidebar_init(GatSidebar *self)
 {
+        /* By default we're not scrollable */
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(self),
+                GTK_POLICY_NEVER, GTK_POLICY_NEVER);
 }
 
 static void gat_sidebar_dispose(GObject *object)

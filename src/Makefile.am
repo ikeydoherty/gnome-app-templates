@@ -6,10 +6,12 @@ DISTCHECK_CONFIGURE_FLAGS = --enable-introspection
 lib_LTLIBRARIES = libgapptemplates.la
 
 libgapptemplates_la_SOURCES = \
+	gat-sidebar.h \
+	gat-sidebar.c \
 	gnome-app-window.h \
 	gnome-app-window.c \
-	sidebar-window.c \
 	sidebar-window.h \
+	sidebar-window.c \
 	../data/gat-resources.h \
 	../data/gat-resources.c
 

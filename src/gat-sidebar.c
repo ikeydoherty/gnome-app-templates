@@ -53,7 +53,8 @@ static void gat_sidebar_class_init(GatSidebarClass *klass)
         GObjectClass *g_object_class;
 
         obj_properties[PROP_STACK] =
-        g_param_spec_pointer("stack", "Stack", "Stack",
+        g_param_spec_pointer("stack", "Stack",
+                "Associated stack for this GatSidebar",
                 G_PARAM_READWRITE);
 
         g_object_class = G_OBJECT_CLASS(klass);

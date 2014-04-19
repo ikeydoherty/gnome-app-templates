@@ -74,7 +74,8 @@ static void gat_sidebar_window_class_init(GatSidebarWindowClass *klass)
         g_object_class = G_OBJECT_CLASS(klass);
 
         obj_properties[PROP_SIDEBAR_TITLE] =
-        g_param_spec_string("side-title", "Side title", "Side title",
+        g_param_spec_string("side-title", "Side title",
+                "Title to display in sidebar header",
                 "Sidebar",
                 G_PARAM_READWRITE);
 

@@ -29,7 +29,7 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="GatSidebarWindow.top_of_page"></a>GatSidebarWindow</span></h2>
-<p>GatSidebarWindow</p>
+<p>GatSidebarWindow — A window with an automatic sidebar</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -113,6 +113,19 @@
 </div>
 <div class="refsect1">
 <a name="GatSidebarWindow.description"></a><h2>Description</h2>
+<p>A GatSidebarWindow enables you to quickly build an application UI
+that contains a content area, and a sidebar area.</p>
+<p>The application window is automatically split into two major parts,
+and enables separate "headers" (titles) for the sidebar area, and
+the main content area.</p>
+<p>When adding content to the window, you should use <a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-content-area" title="gat_sidebar_window_get_content_area ()"><span class="type">gat_sidebar_window_get_content_area</span></a>
+This returns a <span class="type">GtkBox</span> in a vertical orientation, enabling you to add
+anything you wish.</p>
+<p>When manipulating the sidebar area, you should use <a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-sidebar" title="gat_sidebar_window_get_sidebar ()"><span class="type">gat_sidebar_window_get_sidebar</span></a>
+This returns a <span class="type">GtkRevealer</span> which has its content hidden by default.
+This enables derived UIs to hide the sidebar when it is not required.
+Note no transition is enabled by default, this is left to the application
+developer to implement.</p>
 </div>
 <div class="refsect1">
 <a name="GatSidebarWindow.functions_details"></a><h2>Functions</h2>
@@ -132,8 +145,14 @@ gat_sidebar_window_new (<em class="parameter"><code><span class="type">void</spa
 <a name="gat-sidebar-window-get-sidebar"></a><h3>gat_sidebar_window_get_sidebar ()</h3>
 <pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
 gat_sidebar_window_get_sidebar (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
+<p>This method returns the sidebar area of the <a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a>. By
+default this is a <span class="type">GtkRevealer</span>, which is hidden. When adding to
+the sidebar area, do so as with any normal <span class="type">GtkContainer</span>.</p>
+<p>This uses the left-hand side of the UI, and will only use as much
+space as required by the widget. Notice that the sidebar header
+will match the size of the sidebar itself.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.3.4"></a><h4>Parameters</h4>
+<a name="id-1.2.4.7.3.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -148,7 +167,7 @@ gat_sidebar_window_get_sidebar (<em class="parameter"><code><a class="link" href
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.3.5"></a><h4>Returns</h4>
+<a name="id-1.2.4.7.3.7"></a><h4>Returns</h4>
 <p> the sidebar. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -158,8 +177,11 @@ gat_sidebar_window_get_sidebar (<em class="parameter"><code><a class="link" href
 <a name="gat-sidebar-window-get-content-area"></a><h3>gat_sidebar_window_get_content_area ()</h3>
 <pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
 gat_sidebar_window_get_content_area (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
+<p>This method returns the main content area of the <a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a>
+This is by default a vertical <span class="type">GtkBox</span>, which is configured to use
+as much space as possible within the UI.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.4.4"></a><h4>Parameters</h4>
+<a name="id-1.2.4.7.4.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -174,7 +196,7 @@ gat_sidebar_window_get_content_area (<em class="parameter"><code><a class="link"
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.4.5"></a><h4>Returns</h4>
+<a name="id-1.2.4.7.4.6"></a><h4>Returns</h4>
 <p> content area. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -185,7 +207,9 @@ gat_sidebar_window_get_content_area (<em class="parameter"><code><a class="link"
 <pre class="programlisting"><span class="returnvalue">void</span>
 gat_sidebar_window_set_sidebar_title (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>,
                                       <em class="parameter"><code>const <span class="type">gchar</span> *title</code></em>);</pre>
-<p>Update the sidebar title</p>
+<p>Update the sidebar title of the <a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a>. This will be displayed
+in the header area above the sidebar itself. The UI will automatically
+adjust the allocation using a <span class="type">GtkSizeGroup</span></p>
 <div class="refsect3">
 <a name="id-1.2.4.7.5.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
@@ -214,7 +238,8 @@ gat_sidebar_window_set_sidebar_title (<em class="parameter"><code><a class="link
 <a name="gat-sidebar-window-get-sidebar-title"></a><h3>gat_sidebar_window_get_sidebar_title ()</h3>
 <pre class="programlisting">const <span class="returnvalue">gchar</span> *
 gat_sidebar_window_get_sidebar_title (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
-<p>Get the current sidebar title</p>
+<p>Get the currently set sidebar title. Do not free this string, as
+<a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> owns this reference.</p>
 <div class="refsect3">
 <a name="id-1.2.4.7.6.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

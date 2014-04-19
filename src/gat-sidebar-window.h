@@ -26,7 +26,7 @@
 #include <glib-object.h>
 #include <gtk/gtk.h>
 
-#include "gnome-app-window.h"
+#include <gat-gnome-app-window.h>
 
 typedef struct _GatSidebarWindow GatSidebarWindow;
 typedef struct _GatSidebarWindowClass   GatSidebarWindowClass;
@@ -42,7 +42,7 @@ typedef struct _GatSidebarWindowPriv GatSidebarWindowPrivate;
 #define GAT_SIDEBAR_WINDOW_GET_CLASS(obj)        (G_TYPE_INSTANCE_GET_CLASS ((obj), GAT_SIDEBAR_WINDOW_TYPE, GatSidebarWindowClass))
 
 /**
- * SECTION:sidebar-window
+ * SECTION:gat-sidebar-window
  * @short_description: A window with an automatic sidebar
  * @title: GatSidebarWindow
  *

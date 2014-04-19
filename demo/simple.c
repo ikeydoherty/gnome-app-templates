@@ -23,7 +23,7 @@
 
 #include <stdlib.h>
 
-#include <gnome-app-window.h>
+#include <gat-gnome-app-window.h>
 
 int main(int argc, char **argv)
 {

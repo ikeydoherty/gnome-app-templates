@@ -21,7 +21,7 @@
  * 
  */
 
-#include "sidebar-window.h"
+#include "gat-sidebar-window.h"
 
 struct _GatSidebarWindowPriv {
         GtkWidget *left_header;

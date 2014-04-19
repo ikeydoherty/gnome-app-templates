@@ -8,12 +8,17 @@ lib_LTLIBRARIES = libgapptemplates.la
 libgapptemplates_la_SOURCES = \
 	gat-sidebar.h \
 	gat-sidebar.c \
-	gnome-app-window.h \
-	gnome-app-window.c \
-	sidebar-window.h \
-	sidebar-window.c \
+	gat-gnome-app-window.h \
+	gat-gnome-app-window.c \
+	gat-sidebar-window.h \
+	gat-sidebar-window.c \
 	../data/gat-resources.h \
 	../data/gat-resources.c
+
+include_HEADERS = \
+	gat-sidebar.h \
+	gat-gnome-app-window.h \
+	gat-sidebar-window.h
 
 libgapptemplates_la_CFLAGS = \
 	$(GTK3_CFLAGS) \

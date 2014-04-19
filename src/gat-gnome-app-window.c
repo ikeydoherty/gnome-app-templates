@@ -21,7 +21,7 @@
  * 
  */
 
-#include "gnome-app-window.h"
+#include "gat-gnome-app-window.h"
 
 struct _GatGnomeAppWindowPriv {
         GtkWidget *header;

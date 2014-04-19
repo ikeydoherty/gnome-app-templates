@@ -17,8 +17,8 @@
   <chapter>
     <title>Gnome Application Templates</title>
         <xi:include href="xml/gat-sidebar.xml"/>
-    <xi:include href="xml/gnome-app-window.xml"/>
-    <xi:include href="xml/sidebar-window.xml"/>
+    <xi:include href="xml/gat-gnome-app-window.xml"/>
+    <xi:include href="xml/gat-sidebar-window.xml"/>
 
   </chapter>
   <chapter id="object-tree">

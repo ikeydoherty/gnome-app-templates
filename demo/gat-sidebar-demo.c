@@ -23,7 +23,7 @@
 
 #include <stdlib.h>
 
-#include <sidebar-window.h>
+#include <gat-sidebar-window.h>
 #include <gat-sidebar.h>
 
 int main(int argc, char **argv)

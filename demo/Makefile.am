@@ -4,7 +4,8 @@ if BUILD_DEMOS
 
 bin_PROGRAMS = \
 	simple-demo \
-	sidebar-demo
+	sidebar-demo \
+	gat-sidebar-demo
 
 simple_demo_SOURCES = \
 	simple.c
@@ -25,6 +26,17 @@ sidebar_demo_CFLAGS = \
 	$(AM_CFLAGS)
 
 sidebar_demo_LDADD = \
+	$(GTK3_LIBS) \
+	../src/libgapptemplates.la
+
+gat_sidebar_demo_SOURCES = \
+	gat-sidebar-demo.c
+
+gat_sidebar_demo_CFLAGS = \
+	$(GTK3_CFLAGS) \
+	$(AM_CFLAGS)
+
+gat_sidebar_demo_LDADD = \
 	$(GTK3_LIBS) \
 	../src/libgapptemplates.la
 

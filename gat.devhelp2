@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Gat Reference Manual" link="index.html" author="" name="gat" version="2" language="c">
+  <chapters>
+    <sub name="Gnome Application Templates" link="ch01.html">
+      <sub name="GatSidebar" link="GatSidebar.html"/>
+      <sub name="GatGnomeAppWindow" link="GatGnomeAppWindow.html"/>
+      <sub name="GatSidebarWindow" link="GatSidebarWindow.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Index of deprecated API" link="deprecated-api-index.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <keyword type="function" name="gat_sidebar_new ()" link="GatSidebar.html#gat-sidebar-new"/>
+    <keyword type="function" name="gat_sidebar_set_stack ()" link="GatSidebar.html#gat-sidebar-set-stack"/>
+    <keyword type="function" name="gat_sidebar_get_stack ()" link="GatSidebar.html#gat-sidebar-get-stack"/>
+    <keyword type="property" name="The “stack” property" link="GatSidebar.html#GatSidebar--stack"/>
+    <keyword type="function" name="gat_gnome_app_window_new ()" link="GatGnomeAppWindow.html#gat-gnome-app-window-new"/>
+    <keyword type="function" name="gat_sidebar_window_new ()" link="GatSidebarWindow.html#gat-sidebar-window-new"/>
+    <keyword type="function" name="gat_sidebar_window_get_sidebar ()" link="GatSidebarWindow.html#gat-sidebar-window-get-sidebar"/>
+    <keyword type="function" name="gat_sidebar_window_get_content_area ()" link="GatSidebarWindow.html#gat-sidebar-window-get-content-area"/>
+    <keyword type="function" name="gat_sidebar_window_set_sidebar_title ()" link="GatSidebarWindow.html#gat-sidebar-window-set-sidebar-title"/>
+    <keyword type="function" name="gat_sidebar_window_get_sidebar_title ()" link="GatSidebarWindow.html#gat-sidebar-window-get-sidebar-title"/>
+    <keyword type="property" name="The “side-title” property" link="GatSidebarWindow.html#GatSidebarWindow--side-title"/>
+  </functions>
+</book>

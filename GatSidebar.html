@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Gat Reference Manual: GatSidebar</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Gat Reference Manual">
+<link rel="up" href="ch01.html" title="Gnome Application Templates">
+<link rel="prev" href="ch01.html" title="Gnome Application Templates">
+<link rel="next" href="GatGnomeAppWindow.html" title="GatGnomeAppWindow">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
+                  <a href="#GatSidebar.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
+                  <a href="#GatSidebar.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties"> <span class="dim">|</span> 
+                  <a href="#GatSidebar.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="GatGnomeAppWindow.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="GatSidebar"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GatSidebar.top_of_page"></a>GatSidebar</span></h2>
+<p>GatSidebar</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="GatSidebar.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkWidget</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebar.html#gat-sidebar-new" title="gat_sidebar_new ()">gat_sidebar_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebar.html#gat-sidebar-set-stack" title="gat_sidebar_set_stack ()">gat_sidebar_set_stack</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkStack</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebar.html#gat-sidebar-get-stack" title="gat_sidebar_get_stack ()">gat_sidebar_get_stack</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody><tr>
+<td class="property_type"><span class="type">gpointer</span></td>
+<td class="property_name"><a class="link" href="GatSidebar.html#GatSidebar--stack" title="The “stack” property">stack</a></td>
+<td class="property_flags">Read / Write</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    GObject
+    <span class="lineart">╰──</span> GInitiallyUnowned
+        <span class="lineart">╰──</span> GtkWidget
+            <span class="lineart">╰──</span> GtkContainer
+                <span class="lineart">╰──</span> GtkBin
+                    <span class="lineart">╰──</span> GtkScrolledWindow
+                        <span class="lineart">╰──</span> GatSidebar
+</pre>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="gat-sidebar-new"></a><h3>gat_sidebar_new ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
+gat_sidebar_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Construct a new GatSidebar</p>
+<div class="refsect3">
+<a name="id-1.2.2.7.2.5"></a><h4>Returns</h4>
+<p> a new GatSidebar. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-set-stack"></a><h3>gat_sidebar_set_stack ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gat_sidebar_set_stack (<em class="parameter"><code><a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a> *sidebar</code></em>,
+                       <em class="parameter"><code><span class="type">GtkStack</span> *stack</code></em>);</pre>
+<p>Set the stack associated with this GatSidebar</p>
+<div class="refsect3">
+<a name="id-1.2.2.7.3.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>sidebar</p></td>
+<td class="parameter_description"><p>A GatSidebar</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>stack</p></td>
+<td class="parameter_description"><p>a GtkStack</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-get-stack"></a><h3>gat_sidebar_get_stack ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkStack</span> *
+gat_sidebar_get_stack (<em class="parameter"><code><a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a> *sidebar</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.2.7.4.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>sidebar</p></td>
+<td class="parameter_description"><p>A GatSidebar</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.2.7.4.5"></a><h4>Returns</h4>
+<p> the associated GtkStack. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.other_details"></a><h2>Types and Values</h2>
+</div>
+<div class="refsect1">
+<a name="GatSidebar.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GatSidebar--stack"></a><h3>The <code class="literal">“stack”</code> property</h3>
+<pre class="programlisting">  “stack”                    <span class="type">gpointer</span></pre>
+<p>Associated stack for this GatSidebar.</p>
+<p>Flags: Read / Write</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.20</div>
+</body>
+</html>

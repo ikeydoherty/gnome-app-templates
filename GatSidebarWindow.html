@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Gat Reference Manual: GatSidebarWindow</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Gat Reference Manual">
+<link rel="up" href="ch01.html" title="Gnome Application Templates">
+<link rel="prev" href="GatGnomeAppWindow.html" title="GatGnomeAppWindow">
+<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<meta name="generator" content="GTK-Doc V1.20 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="10"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description"> <span class="dim">|</span> 
+                  <a href="#GatSidebarWindow.description" class="shortcut">Description</a></span><span id="nav_hierarchy"> <span class="dim">|</span> 
+                  <a href="#GatSidebarWindow.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties"> <span class="dim">|</span> 
+                  <a href="#GatSidebarWindow.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="GatGnomeAppWindow.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="GatSidebarWindow"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GatSidebarWindow.top_of_page"></a>GatSidebarWindow</span></h2>
+<p>GatSidebarWindow</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="GatSidebarWindow.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkWidget</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-new" title="gat_sidebar_window_new ()">gat_sidebar_window_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkWidget</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-sidebar" title="gat_sidebar_window_get_sidebar ()">gat_sidebar_window_get_sidebar</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkWidget</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-content-area" title="gat_sidebar_window_get_content_area ()">gat_sidebar_window_get_content_area</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-set-sidebar-title" title="gat_sidebar_window_set_sidebar_title ()">gat_sidebar_window_set_sidebar_title</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <span class="returnvalue">gchar</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-sidebar-title" title="gat_sidebar_window_get_sidebar_title ()">gat_sidebar_window_get_sidebar_title</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody><tr>
+<td class="property_type">
+<span class="type">gchar</span> *</td>
+<td class="property_name"><a class="link" href="GatSidebarWindow.html#GatSidebarWindow--side-title" title="The “side-title” property">side-title</a></td>
+<td class="property_flags">Read / Write</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    GObject
+    <span class="lineart">╰──</span> GInitiallyUnowned
+        <span class="lineart">╰──</span> GtkWidget
+            <span class="lineart">╰──</span> GtkContainer
+                <span class="lineart">╰──</span> GtkBin
+                    <span class="lineart">╰──</span> GtkWindow
+                        <span class="lineart">╰──</span> <a class="link" href="GatGnomeAppWindow.html" title="GatGnomeAppWindow">GatGnomeAppWindow</a>
+                            <span class="lineart">╰──</span> GatSidebarWindow
+</pre>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.description"></a><h2>Description</h2>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="gat-sidebar-window-new"></a><h3>gat_sidebar_window_new ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
+gat_sidebar_window_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Construct a new GatSidebarWindow</p>
+<div class="refsect3">
+<a name="id-1.2.4.7.2.5"></a><h4>Returns</h4>
+<p> a new GatSidebarWindow. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-window-get-sidebar"></a><h3>gat_sidebar_window_get_sidebar ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
+gat_sidebar_window_get_sidebar (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.4.7.3.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>window</p></td>
+<td class="parameter_description"><p>A GatSidebarWindow</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.7.3.5"></a><h4>Returns</h4>
+<p> the sidebar. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-window-get-content-area"></a><h3>gat_sidebar_window_get_content_area ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
+gat_sidebar_window_get_content_area (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
+<div class="refsect3">
+<a name="id-1.2.4.7.4.4"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>window</p></td>
+<td class="parameter_description"><p>A GatSidebarWindow</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.7.4.5"></a><h4>Returns</h4>
+<p> content area. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-window-set-sidebar-title"></a><h3>gat_sidebar_window_set_sidebar_title ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+gat_sidebar_window_set_sidebar_title (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>,
+                                      <em class="parameter"><code>const <span class="type">gchar</span> *title</code></em>);</pre>
+<p>Update the sidebar title</p>
+<div class="refsect3">
+<a name="id-1.2.4.7.5.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>window</p></td>
+<td class="parameter_description"><p>A GatSidebarWindow</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>title</p></td>
+<td class="parameter_description"><p>The new sidebar title</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-window-get-sidebar-title"></a><h3>gat_sidebar_window_get_sidebar_title ()</h3>
+<pre class="programlisting">const <span class="returnvalue">gchar</span> *
+gat_sidebar_window_get_sidebar_title (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>);</pre>
+<p>Get the current sidebar title</p>
+<div class="refsect3">
+<a name="id-1.2.4.7.6.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>window</p></td>
+<td class="parameter_description"><p>A GatSidebarWindow</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.7.6.6"></a><h4>Returns</h4>
+<p> Current sidebar title. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.other_details"></a><h2>Types and Values</h2>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="GatSidebarWindow--side-title"></a><h3>The <code class="literal">“side-title”</code> property</h3>
+<pre class="programlisting">  “side-title”               <span class="type">gchar</span> *</pre>
+<p>Title to display in sidebar header.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: "Sidebar"</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.20</div>
+</body>
+</html>

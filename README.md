@@ -12,6 +12,13 @@ Disclaimer/legal
 the GNOME foundation or any of its representatives. The GNOME name is a
 trademark of the GNOME foundation.
 
+Documentation
+-----
+API documentation can be found at: http://ikeydoherty.github.io/gnome-app-templates/
+
+Note this is currently very much Work In Progress, so allow time for this
+library to stabilize before its deemed usable
+
 Author
 ------
  * Ikey Doherty <ikey.doherty@gmail.com>

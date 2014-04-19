@@ -28,15 +28,15 @@ libgapptemplates_la_LIBADD = \
 	$(GTK3_LIBS)
 
 INTROSPECTION_GIRS =
-INTROSPECTION_SCANNER_ARGS = --add-include-path=$(srcdir) --warn-all
-INTROSPECTION_COMPILER_ARGS = --includedir=$(srcdir)
+INTROSPECTION_SCANNER_ARGS = --add-include-path=$(top_srcdir)/src --warn-all
+INTROSPECTION_COMPILER_ARGS = --includedir=$(top_srcdir)
 
 if HAVE_INTROSPECTION
 introspection_sources = $(libgapptemplates_la_SOURCES)
 
 Gat-1.0.gir: libgapptemplates.la
 Gat_1_0_gir_INCLUDES = GObject-2.0 Gtk-3.0
-Gat_1_0_gir_CFLAGS = $(INCLUDES)
+Gat_1_0_gir_CFLAGS = $(INCLUDES) -I $(top_srcdir)/src/
 Gat_1_0_gir_LIBS = libgapptemplates.la
 Gat_1_0_gir_FILES = $(introspection_sources)
 INTROSPECTION_GIRS += Gat-1.0.gir

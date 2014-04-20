@@ -18,13 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
+ *
+ * Many of the ideas for GatSidebar originate in gnome-tweak-tool.
+ * Credit goes to developers of and contributors to gnome-tweak-tool.
+ * The plan here is providing a reusable sidebar widget for all
+ * UI applications on the GNOME platform.
  */
 
 #include "gat-sidebar.h"
 
 struct _GatSidebarPriv {
         GtkWidget *stack;
+        GtkWidget *body;
 };
 
 G_DEFINE_TYPE_WITH_CODE(GatSidebar, gat_sidebar, GTK_TYPE_SCROLLED_WINDOW, G_ADD_PRIVATE(GatSidebar))
@@ -41,6 +46,8 @@ static void gat_sidebar_get_property(GObject *object,
                                      guint prop_id,
                                      GValue *value,
                                      GParamSpec *pspec);
+
+static void rebuild_stack(GatSidebar *self);
 
 enum {
         PROP_0, PROP_STACK, N_PROPERTIES
@@ -76,6 +83,7 @@ static void gat_sidebar_set_property(GObject *object,
         switch (prop_id) {
                 case PROP_STACK:
                         self->priv->stack = GTK_WIDGET(g_value_get_pointer(value));
+                        rebuild_stack(self);
                         break;
                 default:
                         G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
@@ -103,13 +111,38 @@ static void gat_sidebar_get_property(GObject *object,
         }
 }
 
+static void update_header(GtkListBoxRow *row,
+                          GtkListBoxRow *before,
+                          gpointer userdata)
+{
+        GtkWidget *ret = NULL;
+
+        if (before && !gtk_list_box_row_get_header(row)) {
+                ret = gtk_separator_new(GTK_ORIENTATION_HORIZONTAL);
+                gtk_list_box_row_set_header(row, ret);
+        }
+}
+
 static void gat_sidebar_init(GatSidebar *self)
 {
+        GtkWidget *body = NULL;
+        GtkStyleContext *style;
+
         self->priv = gat_sidebar_get_instance_private(self);
 
         /* By default we're not scrollable */
         gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(self),
                 GTK_POLICY_NEVER, GTK_POLICY_NEVER);
+
+        /* We add items to a vertical box */
+        body = gtk_list_box_new();
+        gtk_list_box_set_header_func(GTK_LIST_BOX(body), update_header,
+                self, NULL);
+        gtk_container_add(GTK_CONTAINER(self), body);
+        self->priv->body = body;
+
+        style = gtk_widget_get_style_context(body);
+        gtk_style_context_add_class(style, "sidebar");
 }
 
 static void gat_sidebar_dispose(GObject *object)
@@ -138,4 +171,54 @@ void gat_sidebar_set_stack(GatSidebar *sidebar, GtkStack *stack)
 GtkStack *gat_sidebar_get_stack(GatSidebar *sidebar)
 {
         return GTK_STACK(sidebar->priv->stack);
+}
+
+static void add_cb(GtkContainer *container,
+                   GtkWidget *widget,
+                   gpointer userdata)
+{
+        GtkStyleContext *style;
+
+        GatSidebar *self = NULL;
+        GtkWidget *item = NULL;
+        GtkWidget *row = NULL;
+
+        self = GAT_SIDEBAR(userdata);
+
+        /* Make a pretty item when we add kids */
+        item = gtk_label_new("item");
+        row = gtk_list_box_row_new();
+        gtk_container_add(GTK_CONTAINER(row), item);
+        gtk_container_add(GTK_CONTAINER(self->priv->body), row);
+        gtk_widget_show(item);
+
+        /* Fix up styling */
+        style = gtk_widget_get_style_context(row);
+        gtk_style_context_add_class(style, "sidebar-item");
+}
+
+static void remove_cb(GtkContainer *container,
+                      GtkWidget *widget,
+                      gpointer userdata)
+{
+}
+
+static void rebuild_stack(GatSidebar *self)
+{
+        GList *sprogs, *kid = NULL;
+
+        /* Rebuild ourselves */
+        g_signal_connect(self->priv->stack, "add", G_CALLBACK(add_cb), self);
+        g_signal_connect(self->priv->stack, "remove", G_CALLBACK(remove_cb), self);
+
+        /* Fire add for each kid */
+        sprogs = gtk_container_get_children(GTK_CONTAINER(self->priv->stack));
+        if (!sprogs) {
+                return;
+        }
+
+        for (kid = sprogs; kid->next != NULL; kid = kid->next) {
+                /* Add existing kids */
+                add_cb(GTK_CONTAINER(self->priv->stack), GTK_WIDGET(kid->data), self);
+        }
 }

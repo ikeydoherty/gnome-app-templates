@@ -11,3 +11,11 @@
 .gat-titlebar-left:dir(rtl) {
     border-top-left-radius: 0;
 }
+
+/* the sidebar */
+.sidebar {
+    background-color: shade(@theme_bg_color, 0.99)
+}
+.sidebar-item {
+    padding: 10px;
+}

@@ -181,6 +181,8 @@ static void gat_sidebar_window_init(GatSidebarWindow *self)
         g_signal_connect(sidebar, "remove", G_CALLBACK(container_remove_cb), self);
 
         gtk_box_pack_start(GTK_BOX(layout), sidebar, FALSE, FALSE, 0);
+        sep = gtk_separator_new(GTK_ORIENTATION_VERTICAL);
+        gtk_box_pack_start(GTK_BOX(layout), sep, FALSE, FALSE, 0);
         gtk_box_pack_start(GTK_BOX(layout), content, TRUE, TRUE, 0);
         gtk_container_add(GTK_CONTAINER(self), layout);
 

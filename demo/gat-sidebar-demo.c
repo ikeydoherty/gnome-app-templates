@@ -55,6 +55,7 @@ int main(int argc, char **argv)
         /* And make use of the main content area */
         content = gat_sidebar_window_get_content_area(GAT_SIDEBAR_WINDOW(app_win));
         stack = gtk_stack_new();
+        gat_sidebar_set_stack(GAT_SIDEBAR(sidebar_widg), GTK_STACK(stack));
         gtk_box_pack_start(GTK_BOX(content), stack, TRUE, TRUE, 0);
 
         for (int i = 1; i < 6; i++) {

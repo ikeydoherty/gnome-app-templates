@@ -40,17 +40,19 @@ int main(int argc, char **argv)
 
         app_win = gat_sidebar_window_new();
         g_signal_connect(app_win, "delete-event", gtk_main_quit, NULL);
-        gtk_window_set_default_size(GTK_WINDOW(app_win), 500, 500);
-        gtk_window_set_title(GTK_WINDOW(app_win), "GatSidebarWindow demonstration");
+        gtk_window_set_default_size(GTK_WINDOW(app_win), 700, 500);
+        gtk_window_set_title(GTK_WINDOW(app_win), "GatSidebar demonstration");
 
         /* Set up our sidebar*/
         sidebar = gat_sidebar_window_get_sidebar(GAT_SIDEBAR_WINDOW(app_win));
         sidebar_widg = gat_sidebar_new();
+        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sidebar_widg),
+                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
         gtk_container_add(GTK_CONTAINER(sidebar), sidebar_widg);
         gtk_revealer_set_reveal_child(GTK_REVEALER(sidebar), TRUE);
 
         /* Set sidebar title */
-        gat_sidebar_window_set_sidebar_title(GAT_SIDEBAR_WINDOW(app_win), "Sidebar thing");
+        gat_sidebar_window_set_sidebar_title(GAT_SIDEBAR_WINDOW(app_win), "Sidebar");
 
         /* And make use of the main content area */
         content = gat_sidebar_window_get_content_area(GAT_SIDEBAR_WINDOW(app_win));
@@ -58,7 +60,7 @@ int main(int argc, char **argv)
         gat_sidebar_set_stack(GAT_SIDEBAR(sidebar_widg), GTK_STACK(stack));
         gtk_box_pack_start(GTK_BOX(content), stack, TRUE, TRUE, 0);
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 8; i++) {
                 child_txt = g_strdup_printf("<big>Page %d</big>", i);
                 child_title = g_strdup_printf("Item %d", i);
                 child = gtk_label_new(child_txt);

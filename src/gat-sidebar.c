@@ -143,6 +143,39 @@ static void update_header(GtkListBoxRow *row,
         }
 }
 
+static gint sort_list(GtkListBoxRow *row1,
+                      GtkListBoxRow *row2,
+                      gpointer userdata)
+{
+        StackPageMeta *meta = NULL;
+        GtkWidget *kidlet = NULL;
+        gint left = 0; gint right = 0;
+        GatSidebar *self;
+
+        self = GAT_SIDEBAR(userdata);
+
+        if (row1) {
+                kidlet = gtk_bin_get_child(GTK_BIN(row1));
+                meta = g_object_get_data(G_OBJECT(kidlet), "gat-meta");
+                gtk_container_child_get(GTK_CONTAINER(self->priv->stack),
+                        meta->widget, "position", &left, NULL);
+        }
+
+        if (row2) {
+                kidlet = gtk_bin_get_child(GTK_BIN(row2));
+                meta = g_object_get_data(G_OBJECT(kidlet), "gat-meta");
+                gtk_container_child_get(GTK_CONTAINER(self->priv->stack),
+                        meta->widget, "position", &right, NULL);
+        }
+
+        if (left < right) {
+                return  -1;
+        }
+        if (left == right) {
+                return 0;
+        }
+        return 1;
+}
 static void row_activated(GtkListBox *box,
                           GtkListBoxRow *row,
                           gpointer userdata)
@@ -180,6 +213,8 @@ static void gat_sidebar_init(GatSidebar *self)
         /* We add items to a vertical box */
         body = gtk_list_box_new();
         gtk_list_box_set_header_func(GTK_LIST_BOX(body), update_header,
+                self, NULL);
+        gtk_list_box_set_sort_func(GTK_LIST_BOX(body), sort_list,
                 self, NULL);
         gtk_container_add(GTK_CONTAINER(self), body);
         self->priv->body = body;
@@ -254,14 +289,18 @@ static void child_cb(GtkWidget *widget,
         meta = g_hash_table_lookup(self->priv->table, widget);
         g_assert(meta != NULL);
 
-        gtk_container_child_get(GTK_CONTAINER(self->priv->stack), widget,
-                "title", &title, NULL);
+        if (g_str_equal(prop->name, "title")) {
+                gtk_container_child_get(GTK_CONTAINER(self->priv->stack), widget,
+                        "title", &title, NULL);
 
-        /* We only have a label widget now for the row */
-        gtk_label_set_text(GTK_LABEL(meta->sidebar_item), title);
-        if (meta->title) {
-                g_free(meta->title);
-                meta->title = title;
+                /* We only have a label widget now for the row */
+                gtk_label_set_text(GTK_LABEL(meta->sidebar_item), title);
+                if (meta->title) {
+                        g_free(meta->title);
+                        meta->title = title;
+                }
+        } else if (g_str_equal(prop->name, "position")) {
+                gtk_list_box_invalidate_sort(GTK_LIST_BOX(self->priv->body));
         }
 }
 
@@ -286,7 +325,6 @@ static void add_cb(GtkContainer *container,
         item = gtk_label_new("item");
         row = gtk_list_box_row_new();
         gtk_container_add(GTK_CONTAINER(row), item);
-        gtk_container_add(GTK_CONTAINER(self->priv->body), row);
         gtk_widget_show(item);
 
         /* Hook up for events */
@@ -302,6 +340,8 @@ static void add_cb(GtkContainer *container,
         meta->sidebar_item = item;
         g_object_set_data(G_OBJECT(item), "gat-meta", meta);
         g_hash_table_insert(self->priv->table, widget, meta);
+
+        gtk_container_add(GTK_CONTAINER(self->priv->body), row);
 }
 
 static void remove_cb(GtkContainer *container,

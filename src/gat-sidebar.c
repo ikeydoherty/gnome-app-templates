@@ -147,7 +147,7 @@ static void row_activated(GtkListBox *box,
                           GtkListBoxRow *row,
                           gpointer userdata)
 {
-        __attribute__ ((unused)) GatSidebar *self;
+        GatSidebar *self;
         GtkWidget *child = NULL;
         StackPageMeta *meta = NULL;
 

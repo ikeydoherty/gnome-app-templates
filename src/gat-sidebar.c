@@ -30,9 +30,19 @@
 struct _GatSidebarPriv {
         GtkWidget *stack;
         GtkWidget *body;
+        GHashTable *table;
+        gulong add_id;
+        gulong remove_id;
 };
 
 G_DEFINE_TYPE_WITH_CODE(GatSidebar, gat_sidebar, GTK_TYPE_SCROLLED_WINDOW, G_ADD_PRIVATE(GatSidebar))
+
+/* Used privately to track stack pages */
+typedef struct StackPageMeta {
+        gchar *title;
+        GtkWidget *widget;
+        GtkWidget *sidebar_item;
+} StackPageMeta;
 
 /* Boilerplate GObject code */
 static void gat_sidebar_class_init(GatSidebarClass *klass);
@@ -48,6 +58,7 @@ static void gat_sidebar_get_property(GObject *object,
                                      GParamSpec *pspec);
 
 static void rebuild_stack(GatSidebar *self);
+static void cleanup_val(gpointer data);
 
 enum {
         PROP_0, PROP_STACK, N_PROPERTIES
@@ -82,6 +93,15 @@ static void gat_sidebar_set_property(GObject *object,
         self = GAT_SIDEBAR(object);
         switch (prop_id) {
                 case PROP_STACK:
+                        /* Disconnect old handlers */
+                        if (self->priv->stack) {
+                                g_signal_handler_disconnect(self->priv->stack,
+                                        self->priv->add_id);
+                                self->priv->add_id = 0;
+                                g_signal_handler_disconnect(self->priv->stack,
+                                        self->priv->remove_id);
+                                self->priv->remove_id = 0;
+                        }
                         self->priv->stack = GTK_WIDGET(g_value_get_pointer(value));
                         rebuild_stack(self);
                         break;
@@ -143,10 +163,32 @@ static void gat_sidebar_init(GatSidebar *self)
 
         style = gtk_widget_get_style_context(body);
         gtk_style_context_add_class(style, "sidebar");
+
+        /* Store this for later abuse */
+        self->priv->table = g_hash_table_new_full(g_direct_hash,
+                g_direct_equal, NULL, cleanup_val);
 }
 
 static void gat_sidebar_dispose(GObject *object)
 {
+        GatSidebar *self;
+
+        self = GAT_SIDEBAR(object);
+
+        /* Ensure we kill signals first */
+        if (self->priv->add_id != 0) {
+                g_signal_handler_disconnect(self->priv->stack, self->priv->add_id);
+                self->priv->add_id = 0;
+        }
+        if (self->priv->remove_id != 0) {
+                g_signal_handler_disconnect(self->priv->stack, self->priv->remove_id);
+                self->priv->remove_id = 0;
+        }
+
+        if (self->priv->table) {
+                g_hash_table_unref(self->priv->table);
+                self->priv->table = NULL;
+        }
         /* Destruct */
         G_OBJECT_CLASS (gat_sidebar_parent_class)->dispose(object);
 }
@@ -173,17 +215,45 @@ GtkStack *gat_sidebar_get_stack(GatSidebar *sidebar)
         return GTK_STACK(sidebar->priv->stack);
 }
 
+static void child_cb(GtkWidget *widget,
+                     GParamSpec *prop,
+                     gpointer userdata)
+{
+        StackPageMeta *meta = NULL;
+        gchar *title = NULL;
+        GatSidebar *self;
+
+        self = GAT_SIDEBAR(userdata);
+        meta = g_hash_table_lookup(self->priv->table, widget);
+        g_assert(meta != NULL);
+
+        gtk_container_child_get(GTK_CONTAINER(self->priv->stack), widget,
+                "title", &title, NULL);
+
+        /* We only have a label widget now for the row */
+        gtk_label_set_text(GTK_LABEL(meta->sidebar_item), title);
+        if (meta->title) {
+                g_free(meta->title);
+                meta->title = title;
+        }
+}
+
 static void add_cb(GtkContainer *container,
                    GtkWidget *widget,
                    gpointer userdata)
 {
         GtkStyleContext *style;
-
+        StackPageMeta *meta = NULL;
         GatSidebar *self = NULL;
         GtkWidget *item = NULL;
         GtkWidget *row = NULL;
 
         self = GAT_SIDEBAR(userdata);
+
+        /* Check we don't actually already know about this widget */
+        if (g_hash_table_lookup(self->priv->table, widget)) {
+                return;
+        }
 
         /* Make a pretty item when we add kids */
         item = gtk_label_new("item");
@@ -192,15 +262,37 @@ static void add_cb(GtkContainer *container,
         gtk_container_add(GTK_CONTAINER(self->priv->body), row);
         gtk_widget_show(item);
 
+        /* Hook up for events */
+        g_signal_connect(widget, "child-notify::title", G_CALLBACK(child_cb), self);
+
         /* Fix up styling */
         style = gtk_widget_get_style_context(row);
         gtk_style_context_add_class(style, "sidebar-item");
+
+        /* Store the meta info */
+        meta = g_new0(StackPageMeta, 1);
+        meta->widget = widget;
+        meta->sidebar_item = item;
+
+        g_hash_table_insert(self->priv->table, widget, meta);
 }
 
 static void remove_cb(GtkContainer *container,
                       GtkWidget *widget,
                       gpointer userdata)
 {
+        GatSidebar *self;
+        StackPageMeta *meta = NULL;
+
+        self = GAT_SIDEBAR(userdata);
+        meta = g_hash_table_lookup(self->priv->table, widget);
+        if (!meta) {
+                return;
+        }
+        /* Remove from sidebar */
+        gtk_widget_destroy(meta->sidebar_item);
+        meta->sidebar_item = NULL;
+        g_hash_table_remove(self->priv->table, widget);
 }
 
 static void rebuild_stack(GatSidebar *self)
@@ -208,8 +300,10 @@ static void rebuild_stack(GatSidebar *self)
         GList *sprogs, *kid = NULL;
 
         /* Rebuild ourselves */
-        g_signal_connect(self->priv->stack, "add", G_CALLBACK(add_cb), self);
-        g_signal_connect(self->priv->stack, "remove", G_CALLBACK(remove_cb), self);
+        self->priv->add_id = g_signal_connect(self->priv->stack, "add",
+                G_CALLBACK(add_cb), self);
+        self->priv->remove_id = g_signal_connect(self->priv->stack,
+                "remove", G_CALLBACK(remove_cb), self);
 
         /* Fire add for each kid */
         sprogs = gtk_container_get_children(GTK_CONTAINER(self->priv->stack));
@@ -221,4 +315,18 @@ static void rebuild_stack(GatSidebar *self)
                 /* Add existing kids */
                 add_cb(GTK_CONTAINER(self->priv->stack), GTK_WIDGET(kid->data), self);
         }
+}
+
+/* Cleanup a StackPageMeta */
+static void cleanup_val(gpointer data)
+{
+        StackPageMeta *meta = (StackPageMeta*)data;
+        if (!meta) {
+                return;
+        }
+        if (meta->title) {
+                g_free(meta->title);
+                meta->title = NULL;
+        }
+        g_free(data);
 }

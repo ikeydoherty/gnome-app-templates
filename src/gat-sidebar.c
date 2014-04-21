@@ -42,6 +42,7 @@ typedef struct StackPageMeta {
         gchar *title;
         GtkWidget *widget;
         GtkWidget *sidebar_item;
+        gulong notify_id;
 } StackPageMeta;
 
 /* Boilerplate GObject code */
@@ -327,9 +328,6 @@ static void add_cb(GtkContainer *container,
         gtk_container_add(GTK_CONTAINER(row), item);
         gtk_widget_show(item);
 
-        /* Hook up for events */
-        g_signal_connect(widget, "child-notify::title", G_CALLBACK(child_cb), self);
-
         /* Fix up styling */
         style = gtk_widget_get_style_context(row);
         gtk_style_context_add_class(style, "sidebar-item");
@@ -338,6 +336,10 @@ static void add_cb(GtkContainer *container,
         meta = g_new0(StackPageMeta, 1);
         meta->widget = widget;
         meta->sidebar_item = item;
+        /* Hook up for events */
+        meta->notify_id = g_signal_connect(widget, "child-notify::title",
+                G_CALLBACK(child_cb), self);
+
         g_object_set_data(G_OBJECT(item), "gat-meta", meta);
         g_hash_table_insert(self->priv->table, widget, meta);
 
@@ -357,6 +359,7 @@ static void remove_cb(GtkContainer *container,
                 return;
         }
         /* Remove from sidebar */
+        g_signal_handler_disconnect(widget, meta->notify_id);
         gtk_widget_destroy(meta->sidebar_item);
         meta->sidebar_item = NULL;
         g_hash_table_remove(self->priv->table, widget);

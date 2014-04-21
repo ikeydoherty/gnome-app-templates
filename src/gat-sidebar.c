@@ -143,6 +143,29 @@ static void update_header(GtkListBoxRow *row,
         }
 }
 
+static void row_activated(GtkListBox *box,
+                          GtkListBoxRow *row,
+                          gpointer userdata)
+{
+        __attribute__ ((unused)) GatSidebar *self;
+        GtkWidget *child = NULL;
+        StackPageMeta *meta = NULL;
+
+        self = GAT_SIDEBAR(userdata);
+        if (!row) {
+                return;
+        }
+
+        child = gtk_bin_get_child(GTK_BIN(row));
+        meta = g_object_get_data(G_OBJECT(child), "gat-meta");
+        if (!meta) {
+                return;
+        }
+
+        gtk_stack_set_visible_child(GTK_STACK(self->priv->stack),
+                meta->widget);
+}
+
 static void gat_sidebar_init(GatSidebar *self)
 {
         GtkWidget *body = NULL;
@@ -167,6 +190,10 @@ static void gat_sidebar_init(GatSidebar *self)
         /* Store this for later abuse */
         self->priv->table = g_hash_table_new_full(g_direct_hash,
                 g_direct_equal, NULL, cleanup_val);
+
+        /* Enable switching pages with us. */
+        g_signal_connect(self->priv->body, "row-activated",
+                G_CALLBACK(row_activated), self);
 }
 
 static void gat_sidebar_dispose(GObject *object)
@@ -273,7 +300,7 @@ static void add_cb(GtkContainer *container,
         meta = g_new0(StackPageMeta, 1);
         meta->widget = widget;
         meta->sidebar_item = item;
-
+        g_object_set_data(G_OBJECT(item), "gat-meta", meta);
         g_hash_table_insert(self->priv->table, widget, meta);
 }
 

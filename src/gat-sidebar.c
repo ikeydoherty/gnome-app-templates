@@ -324,6 +324,7 @@ static void add_cb(GtkContainer *container,
 
         /* Make a pretty item when we add kids */
         item = gtk_label_new("item");
+        gtk_misc_set_alignment(GTK_MISC(item), 0.0f, 0.5f);
         row = gtk_list_box_row_new();
         gtk_container_add(GTK_CONTAINER(row), item);
         gtk_widget_show(item);

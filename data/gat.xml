@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<glade-catalog name="gat"
+    library="gapptemplates"
+    domain="glade-3"
+    depends="gtk+">
+
+ <glade-widget-classes>
+   <glade-widget-class title="Gat Sidebar"
+    name="GatSidebar"
+    generic-name="gat_sidebar" />
+   <glade-widget-class title="Gat Sidebar Window"
+    name="GatSidebarWindow"
+    generic-name="gat_sidebar_window" />
+   <glade-widget-class title="Gat Application Window"
+    name="GatGnomeAppWindow"
+    generic-name="gat_gnome_app_window" />
+ </glade-widget-classes>
+
+ <glade-widget-group name="Gat" title="Gat Widgets">
+   <glade-widget-class-ref name="GatSidebar"/>
+   <glade-widget-class-ref name="GatSidebarWindow"/>
+   <glade-widget-class-ref name="GatGnomeAppWindow"/>
+ </glade-widget-group>
+</glade-catalog>

@@ -4,7 +4,8 @@ resource_files = $(shell glib-compile-resources --sourcedir=$(srcdir) --generate
 
 EXTRA_DIST = \
 	gat.gresource.xml \
-	style.css
+	style.css \
+	gat.xml
 
 BUILT_SOURCES = \
 	gat-resources.h \

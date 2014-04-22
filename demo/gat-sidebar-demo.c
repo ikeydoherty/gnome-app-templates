@@ -76,6 +76,10 @@ int main(int argc, char **argv)
         /* And show */
         gtk_widget_show_all(app_win);
 
+        /* Remember you've performed show, so the first item in the stack
+         * would be exposed. i.e. do this after "show" on GtkStack */
+        gtk_stack_set_visible_child_name(GTK_STACK(stack), "Item 5");
+
         gtk_main();
 
         return EXIT_SUCCESS;

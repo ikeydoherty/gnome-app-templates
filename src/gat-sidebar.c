@@ -33,6 +33,8 @@ struct _GatSidebarPriv {
         GHashTable *table;
         gulong add_id;
         gulong remove_id;
+        gulong change_id;
+        gulong active_id;
 };
 
 G_DEFINE_TYPE_WITH_CODE(GatSidebar, gat_sidebar, GTK_TYPE_SCROLLED_WINDOW, G_ADD_PRIVATE(GatSidebar))
@@ -42,6 +44,7 @@ typedef struct StackPageMeta {
         gchar *title;
         GtkWidget *widget;
         GtkWidget *sidebar_item;
+        GtkWidget *sidebar_row;
         gulong notify_id;
 } StackPageMeta;
 
@@ -102,6 +105,9 @@ static void gat_sidebar_set_property(GObject *object,
                                 g_signal_handler_disconnect(self->priv->stack,
                                         self->priv->remove_id);
                                 self->priv->remove_id = 0;
+                                g_signal_handler_disconnect(self->priv->stack,
+                                        self->priv->change_id);
+                                self->priv->change_id = 0;
                         }
                         self->priv->stack = GTK_WIDGET(g_value_get_pointer(value));
                         rebuild_stack(self);
@@ -228,8 +234,8 @@ static void gat_sidebar_init(GatSidebar *self)
                 g_direct_equal, NULL, cleanup_val);
 
         /* Enable switching pages with us. */
-        g_signal_connect(self->priv->body, "row-activated",
-                G_CALLBACK(row_activated), self);
+        self->priv->active_id = g_signal_connect(self->priv->body,
+                "row-activated", G_CALLBACK(row_activated), self);
 }
 
 static void gat_sidebar_dispose(GObject *object)
@@ -246,6 +252,10 @@ static void gat_sidebar_dispose(GObject *object)
         if (self->priv->remove_id != 0) {
                 g_signal_handler_disconnect(self->priv->stack, self->priv->remove_id);
                 self->priv->remove_id = 0;
+        }
+        if (self->priv->change_id != 0) {
+                g_signal_handler_disconnect(self->priv->stack, self->priv->change_id);
+                self->priv->change_id = 0;
         }
 
         if (self->priv->table) {
@@ -337,6 +347,7 @@ static void add_cb(GtkContainer *container,
         meta = g_new0(StackPageMeta, 1);
         meta->widget = widget;
         meta->sidebar_item = item;
+        meta->sidebar_row = row;
         /* Hook up for events */
         meta->notify_id = g_signal_connect(widget, "child-notify::title",
                 G_CALLBACK(child_cb), self);
@@ -366,6 +377,31 @@ static void remove_cb(GtkContainer *container,
         g_hash_table_remove(self->priv->table, widget);
 }
 
+static void visible_cb(GtkWidget *widget,
+                       GParamSpec *prop,
+                       gpointer userdata)
+{
+        StackPageMeta *item = NULL;
+        GtkWidget *child = NULL;
+        GatSidebar *self;
+
+        self = GAT_SIDEBAR(userdata);
+        g_object_get(widget, "visible-child", &child, NULL);
+        if (!child) {
+                return;
+        }
+        item = g_hash_table_lookup(self->priv->table, child);
+        if (!item) {
+                g_warning("Unknown child in GatSidebar");
+                return;
+        }
+        /* Lets not force a chain here */
+        g_signal_handler_block(self->priv->body, self->priv->active_id);
+        gtk_list_box_select_row(GTK_LIST_BOX(self->priv->body),
+                GTK_LIST_BOX_ROW(item->sidebar_row));
+        g_signal_handler_unblock(self->priv->body, self->priv->active_id);
+}
+
 static void rebuild_stack(GatSidebar *self)
 {
         GList *sprogs, *kid = NULL;
@@ -375,6 +411,8 @@ static void rebuild_stack(GatSidebar *self)
                 G_CALLBACK(add_cb), self);
         self->priv->remove_id = g_signal_connect(self->priv->stack,
                 "remove", G_CALLBACK(remove_cb), self);
+        self->priv->change_id = g_signal_connect(self->priv->stack,
+                "notify::visible-child", G_CALLBACK(visible_cb), self);
 
         /* Fire add for each kid */
         sprogs = gtk_container_get_children(GTK_CONTAINER(self->priv->stack));

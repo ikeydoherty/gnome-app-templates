@@ -29,7 +29,7 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="GatSidebar.top_of_page"></a>GatSidebar</span></h2>
-<p>GatSidebar</p>
+<p>GatSidebar — An automatic sidebar widget</p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
@@ -96,6 +96,21 @@
 </div>
 <div class="refsect1">
 <a name="GatSidebar.description"></a><h2>Description</h2>
+<p>A GatSidebarWindow enables you to quickly and easily provide a consistent
+"sidebar" object for your user interface.</p>
+<p>In order to use a GatSidebar, you simply use a GtkStack to organise
+your UI flow, and add the sidebar to your sidebar area. You can use
+<a class="link" href="GatSidebar.html#gat-sidebar-set-stack" title="gat_sidebar_set_stack ()"><span class="type">gat_sidebar_set_stack</span></a> to connect the <a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a> to the <span class="type">GtkStack</span></p>
+<p>The GatSidebar will obtain the titles from the "title" child-property
+of the item within the GtkStack. Theming is automatically handled within
+the library to ensure a consistent look across applications. Note that
+users may use the touch, key or mouse events to interact with this
+widget and select an item within your <span class="type">GtkStack</span> instance.</p>
+<p>It should be of interest to developers that a <a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a> subclasses
+<span class="type">GtkScrolledWindow</span> - this means you can enable the scrolled window
+policy for automatic scrollbars, etc, within a <a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a>. Note that
+scrollbars are disabled by default, leaving it up to the application
+developer to decide on their UI appearance.</p>
 </div>
 <div class="refsect1">
 <a name="GatSidebar.functions_details"></a><h2>Functions</h2>
@@ -116,7 +131,9 @@ gat_sidebar_new (<em class="parameter"><code><span class="type">void</span></cod
 <pre class="programlisting"><span class="returnvalue">void</span>
 gat_sidebar_set_stack (<em class="parameter"><code><a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a> *sidebar</code></em>,
                        <em class="parameter"><code><span class="type">GtkStack</span> *stack</code></em>);</pre>
-<p>Set the stack associated with this GatSidebar</p>
+<p>Set the <span class="type">GtkStack</span> associated with this <a class="link" href="GatSidebar.html" title="GatSidebar"><span class="type">GatSidebar</span></a>. This sidebar widget
+will automatically update according to the order (packing) and items
+within the given <span class="type">GtkStack</span>.</p>
 <div class="refsect3">
 <a name="id-1.2.2.7.3.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">

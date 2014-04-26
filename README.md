@@ -23,7 +23,7 @@ Bindings
 Gat builds GObject Introspection bindings at build time, enabling you to
 use any GI capable language with the library:
 
- * Vala
+ * Vala (not yet ready)
  * JavaScript
  * Python
 

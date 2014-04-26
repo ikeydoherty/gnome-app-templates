@@ -74,7 +74,7 @@ static void gat_sidebar_window_class_init(GatSidebarWindowClass *klass)
         g_object_class = G_OBJECT_CLASS(klass);
 
         obj_properties[PROP_SIDEBAR_TITLE] =
-        g_param_spec_string("side-title", "Side title",
+        g_param_spec_string("sidebar-title", "Side title",
                 "Title to display in sidebar header",
                 "Sidebar",
                 G_PARAM_READWRITE);
@@ -230,7 +230,7 @@ GtkWidget *gat_sidebar_window_get_content_area(GatSidebarWindow *self)
 
 void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *self, const gchar *title)
 {
-        g_object_set(self, "side-title", title, NULL);
+        g_object_set(self, "sidebar-title", title, NULL);
 }
 
 const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *self)

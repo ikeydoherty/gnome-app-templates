@@ -238,6 +238,20 @@ const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *self)
         return (const gchar*)self->priv->side_title;
 }
 
+GtkWidget *gat_sidebar_window_get_headerbar(GatSidebarWindow *self,
+                                            GatHeaderbarPosition position)
+{
+        switch (position) {
+                case GAT_HEADERBAR_POSITION_SIDEBAR:
+                        return self->priv->left_header;
+                case GAT_HEADERBAR_POSITION_MAIN:
+                        return self->priv->right_header;
+                default:
+                        g_warning("Invalid GatHeaderbarPosition");
+                        return NULL;
+        }
+}
+
 static void title_cb(GtkWidget *widget,
                      GParamSpec *param,
                      gpointer userdata)

@@ -75,6 +75,21 @@ struct _GatSidebarWindowClass {
         GatGnomeAppWindowClass parent_class;
 };
 
+/**
+ * GatHeaderbarPosition:
+ * @GAT_HEADERBAR_POSITION_SIDEBAR: Left (sidebar) header widget
+ * @GAT_HEADERBAR_POSITION_MAIN: Center (main) header widget
+ *
+ * Used to specify the positon of the headerbar widget being retrieved
+ * via #gat_sidebar_window_get_headerbar
+ */
+typedef enum {
+        GAT_HEADERBAR_POSITION_MIN = 0,
+        GAT_HEADERBAR_POSITION_SIDEBAR,
+        GAT_HEADERBAR_POSITION_MAIN,
+        GAT_HEADERBAR_POSITION_MAX
+} GatHeaderbarPosition;
+
 GType gat_sidebar_window_get_type(void);
 
 /**
@@ -136,4 +151,17 @@ void gat_sidebar_window_set_sidebar_title(GatSidebarWindow *window, const gchar 
  */
 const gchar *gat_sidebar_window_get_sidebar_title(GatSidebarWindow *window);
 
+/**
+ * gat_sidebar_window_get_headerbar:
+ * @window: A GatSidebarWindow
+ * @position: Which header to return
+ *
+ * Get a specific #GtkHeaderBar widget for this #GatSidebarWindow. This
+ * enables developers to add custom widgets to the headers to add their
+ * own forms of interaction.
+ *
+ * Returns: (transfer none): Underlying #GtkHeaderBar
+ */
+GtkWidget *gat_sidebar_window_get_headerbar(GatSidebarWindow *window,
+                                            GatHeaderbarPosition position);
 #endif /* gat_sidebar_window_h */

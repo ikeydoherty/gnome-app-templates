@@ -23,6 +23,8 @@
     <keyword type="function" name="gat_sidebar_window_get_content_area ()" link="GatSidebarWindow.html#gat-sidebar-window-get-content-area"/>
     <keyword type="function" name="gat_sidebar_window_set_sidebar_title ()" link="GatSidebarWindow.html#gat-sidebar-window-set-sidebar-title"/>
     <keyword type="function" name="gat_sidebar_window_get_sidebar_title ()" link="GatSidebarWindow.html#gat-sidebar-window-get-sidebar-title"/>
-    <keyword type="property" name="The “side-title” property" link="GatSidebarWindow.html#GatSidebarWindow--side-title"/>
+    <keyword type="function" name="gat_sidebar_window_get_headerbar ()" link="GatSidebarWindow.html#gat-sidebar-window-get-headerbar"/>
+    <keyword type="enum" name="enum GatHeaderbarPosition" link="GatSidebarWindow.html#GatHeaderbarPosition"/>
+    <keyword type="property" name="The “sidebar-title” property" link="GatSidebarWindow.html#GatSidebarWindow--sidebar-title"/>
   </functions>
 </book>

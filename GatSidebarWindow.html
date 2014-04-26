@@ -80,6 +80,14 @@
 <a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-sidebar-title" title="gat_sidebar_window_get_sidebar_title ()">gat_sidebar_window_get_sidebar_title</a> <span class="c_punctuation">()</span>
 </td>
 </tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">GtkWidget</span> *
+</td>
+<td class="function_name">
+<a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-headerbar" title="gat_sidebar_window_get_headerbar ()">gat_sidebar_window_get_headerbar</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
 </tbody>
 </table></div>
 </div>
@@ -94,8 +102,21 @@
 <tbody><tr>
 <td class="property_type">
 <span class="type">gchar</span> *</td>
-<td class="property_name"><a class="link" href="GatSidebarWindow.html#GatSidebarWindow--side-title" title="The “side-title” property">side-title</a></td>
+<td class="property_name"><a class="link" href="GatSidebarWindow.html#GatSidebarWindow--sidebar-title" title="The “sidebar-title” property">sidebar-title</a></td>
 <td class="property_flags">Read / Write</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="GatSidebarWindow.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword">enum</td>
+<td class="function_name"><a class="link" href="GatSidebarWindow.html#GatHeaderbarPosition" title="enum GatHeaderbarPosition">GatHeaderbarPosition</a></td>
 </tr></tbody>
 </table></div>
 </div>
@@ -135,7 +156,7 @@ developer to implement.</p>
 gat_sidebar_window_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Construct a new GatSidebarWindow</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.2.5"></a><h4>Returns</h4>
+<a name="id-1.2.4.8.2.5"></a><h4>Returns</h4>
 <p> a new GatSidebarWindow. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
@@ -152,7 +173,7 @@ the sidebar area, do so as with any normal <span class="type">GtkContainer</span
 space as required by the widget. Notice that the sidebar header
 will match the size of the sidebar itself.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.3.6"></a><h4>Parameters</h4>
+<a name="id-1.2.4.8.3.6"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -167,7 +188,7 @@ will match the size of the sidebar itself.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.3.7"></a><h4>Returns</h4>
+<a name="id-1.2.4.8.3.7"></a><h4>Returns</h4>
 <p> the sidebar. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -181,7 +202,7 @@ gat_sidebar_window_get_content_area (<em class="parameter"><code><a class="link"
 This is by default a vertical <span class="type">GtkBox</span>, which is configured to use
 as much space as possible within the UI.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.4.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.8.4.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -196,7 +217,7 @@ as much space as possible within the UI.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.4.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.8.4.6"></a><h4>Returns</h4>
 <p> content area. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
@@ -211,7 +232,7 @@ gat_sidebar_window_set_sidebar_title (<em class="parameter"><code><a class="link
 in the header area above the sidebar itself. The UI will automatically
 adjust the allocation using a <span class="type">GtkSizeGroup</span></p>
 <div class="refsect3">
-<a name="id-1.2.4.7.5.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.8.5.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -241,7 +262,7 @@ gat_sidebar_window_get_sidebar_title (<em class="parameter"><code><a class="link
 <p>Get the currently set sidebar title. Do not free this string, as
 <a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> owns this reference.</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.6.5"></a><h4>Parameters</h4>
+<a name="id-1.2.4.8.6.5"></a><h4>Parameters</h4>
 <div class="informaltable"><table width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
@@ -256,20 +277,98 @@ gat_sidebar_window_get_sidebar_title (<em class="parameter"><code><a class="link
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.7.6.6"></a><h4>Returns</h4>
+<a name="id-1.2.4.8.6.6"></a><h4>Returns</h4>
 <p> Current sidebar title. </p>
+<p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="gat-sidebar-window-get-headerbar"></a><h3>gat_sidebar_window_get_headerbar ()</h3>
+<pre class="programlisting"><span class="returnvalue">GtkWidget</span> *
+gat_sidebar_window_get_headerbar (<em class="parameter"><code><a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a> *window</code></em>,
+                                  <em class="parameter"><code><a class="link" href="GatSidebarWindow.html#GatHeaderbarPosition" title="enum GatHeaderbarPosition"><span class="type">GatHeaderbarPosition</span></a> position</code></em>);</pre>
+<p>Get a specific <span class="type">GtkHeaderBar</span> widget for this <a class="link" href="GatSidebarWindow.html" title="GatSidebarWindow"><span class="type">GatSidebarWindow</span></a>. This
+enables developers to add custom widgets to the headers to add their
+own forms of interaction.</p>
+<div class="refsect3">
+<a name="id-1.2.4.8.7.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>window</p></td>
+<td class="parameter_description"><p>A GatSidebarWindow</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>position</p></td>
+<td class="parameter_description"><p>Which header to return</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.2.4.8.7.6"></a><h4>Returns</h4>
+<p> Underlying <span class="type">GtkHeaderBar</span>. </p>
 <p><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></p>
 </div>
 </div>
 </div>
 <div class="refsect1">
 <a name="GatSidebarWindow.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="GatHeaderbarPosition"></a><h3>enum GatHeaderbarPosition</h3>
+<p>Used to specify the positon of the headerbar widget being retrieved
+via <a class="link" href="GatSidebarWindow.html#gat-sidebar-window-get-headerbar" title="gat_sidebar_window_get_headerbar ()"><span class="type">gat_sidebar_window_get_headerbar</span></a></p>
+<div class="refsect3">
+<a name="id-1.2.4.9.2.4"></a><h4>Members</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="300px" class="enum_members_name">
+<col class="enum_members_description">
+<col width="200px" class="enum_members_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="enum_member_name"><p><a name="GAT-HEADERBAR-POSITION-MIN:CAPS"></a>GAT_HEADERBAR_POSITION_MIN</p></td>
+<td> </td>
+<td> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GAT-HEADERBAR-POSITION-SIDEBAR:CAPS"></a>GAT_HEADERBAR_POSITION_SIDEBAR</p></td>
+<td class="enum_member_description">
+<p>Left (sidebar) header widget</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GAT-HEADERBAR-POSITION-MAIN:CAPS"></a>GAT_HEADERBAR_POSITION_MAIN</p></td>
+<td class="enum_member_description">
+<p>Center (main) header widget</p>
+</td>
+<td class="enum_member_annotations"> </td>
+</tr>
+<tr>
+<td class="enum_member_name"><p><a name="GAT-HEADERBAR-POSITION-MAX:CAPS"></a>GAT_HEADERBAR_POSITION_MAX</p></td>
+<td> </td>
+<td> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
 </div>
 <div class="refsect1">
 <a name="GatSidebarWindow.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
-<a name="GatSidebarWindow--side-title"></a><h3>The <code class="literal">“side-title”</code> property</h3>
-<pre class="programlisting">  “side-title”               <span class="type">gchar</span> *</pre>
+<a name="GatSidebarWindow--sidebar-title"></a><h3>The <code class="literal">“sidebar-title”</code> property</h3>
+<pre class="programlisting">  “sidebar-title”            <span class="type">gchar</span> *</pre>
 <p>Title to display in sidebar header.</p>
 <p>Flags: Read / Write</p>
 <p>Default value: "Sidebar"</p>

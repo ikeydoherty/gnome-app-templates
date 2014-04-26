@@ -21,6 +21,7 @@
 <ANCHOR id="GatSidebarWindow" href="gat/GatSidebarWindow.html">
 <ANCHOR id="GatSidebarWindow.functions" href="gat/GatSidebarWindow.html#GatSidebarWindow.functions">
 <ANCHOR id="GatSidebarWindow.properties" href="gat/GatSidebarWindow.html#GatSidebarWindow.properties">
+<ANCHOR id="GatSidebarWindow.other" href="gat/GatSidebarWindow.html#GatSidebarWindow.other">
 <ANCHOR id="GatSidebarWindow.object-hierarchy" href="gat/GatSidebarWindow.html#GatSidebarWindow.object-hierarchy">
 <ANCHOR id="GatSidebarWindow.description" href="gat/GatSidebarWindow.html#GatSidebarWindow.description">
 <ANCHOR id="GatSidebarWindow.functions_details" href="gat/GatSidebarWindow.html#GatSidebarWindow.functions_details">
@@ -29,8 +30,10 @@
 <ANCHOR id="gat-sidebar-window-get-content-area" href="gat/GatSidebarWindow.html#gat-sidebar-window-get-content-area">
 <ANCHOR id="gat-sidebar-window-set-sidebar-title" href="gat/GatSidebarWindow.html#gat-sidebar-window-set-sidebar-title">
 <ANCHOR id="gat-sidebar-window-get-sidebar-title" href="gat/GatSidebarWindow.html#gat-sidebar-window-get-sidebar-title">
+<ANCHOR id="gat-sidebar-window-get-headerbar" href="gat/GatSidebarWindow.html#gat-sidebar-window-get-headerbar">
 <ANCHOR id="GatSidebarWindow.other_details" href="gat/GatSidebarWindow.html#GatSidebarWindow.other_details">
+<ANCHOR id="GatHeaderbarPosition" href="gat/GatSidebarWindow.html#GatHeaderbarPosition">
 <ANCHOR id="GatSidebarWindow.property-details" href="gat/GatSidebarWindow.html#GatSidebarWindow.property-details">
-<ANCHOR id="GatSidebarWindow--side-title" href="gat/GatSidebarWindow.html#GatSidebarWindow--side-title">
+<ANCHOR id="GatSidebarWindow--sidebar-title" href="gat/GatSidebarWindow.html#GatSidebarWindow--sidebar-title">
 <ANCHOR id="annotation-glossterm-transfer full" href="gat/annotation-glossary.html#annotation-glossterm-transfer full">
 <ANCHOR id="annotation-glossterm-transfer none" href="gat/annotation-glossary.html#annotation-glossterm-transfer none">

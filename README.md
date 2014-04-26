@@ -29,8 +29,8 @@ use any GI capable language with the library:
 
 License
 ------
-gnome-app-templates is available under the terms of the GPL-2.0 license
-(GNU General Public License Version 2)
+gnome-app-templates is available under the terms of the LGPL-2.1 license
+(GNU Lesser General Public License Version 2.1)
 
 Disclaimer/legal
 -----

@@ -34,8 +34,6 @@ int main(int argc, char **argv)
         /* Set up our sidebar*/
         sidebar = gat_sidebar_window_get_sidebar(GAT_SIDEBAR_WINDOW(app_win));
         sidebar_widg = gat_sidebar_new();
-        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(sidebar_widg),
-                GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
         gtk_container_add(GTK_CONTAINER(sidebar), sidebar_widg);
         gtk_revealer_set_reveal_child(GTK_REVEALER(sidebar), TRUE);
 

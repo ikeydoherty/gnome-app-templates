@@ -46,23 +46,17 @@ typedef struct _GatSidebarPriv GatSidebarPrivate;
  * users may use the touch, key or mouse events to interact with this
  * widget and select an item within your #GtkStack instance.
  *
- * It should be of interest to developers that a #GatSidebar subclasses
- * #GtkScrolledWindow - this means you can enable the scrolled window
- * policy for automatic scrollbars, etc, within a #GatSidebar. Note that
- * scrollbars are disabled by default, leaving it up to the application
- * developer to decide on their UI appearance.
- *
  */
 
 /* GatSidebar object */
 struct _GatSidebar {
-        GtkScrolledWindow parent;
+        GtkListBox parent;
         GatSidebarPrivate *priv;
 };
 
 /* GatSidebar class definition */
 struct _GatSidebarClass {
-        GtkScrolledWindowClass parent_class;
+        GtkListBoxClass parent_class;
 };
 
 GType gat_sidebar_get_type(void);

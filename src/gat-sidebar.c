@@ -13,7 +13,6 @@
 
 struct _GatSidebarPriv {
         GtkWidget *stack;
-        GtkWidget *body;
         GHashTable *table;
         gulong add_id;
         gulong remove_id;
@@ -21,7 +20,7 @@ struct _GatSidebarPriv {
         gulong active_id;
 };
 
-G_DEFINE_TYPE_WITH_CODE(GatSidebar, gat_sidebar, GTK_TYPE_SCROLLED_WINDOW, G_ADD_PRIVATE(GatSidebar))
+G_DEFINE_TYPE_WITH_CODE(GatSidebar, gat_sidebar, GTK_TYPE_LIST_BOX, G_ADD_PRIVATE(GatSidebar))
 
 /* Used privately to track stack pages */
 typedef struct StackPageMeta {
@@ -192,25 +191,17 @@ static void row_activated(GtkListBox *box,
 
 static void gat_sidebar_init(GatSidebar *self)
 {
-        GtkWidget *body = NULL;
         GtkStyleContext *style;
 
         self->priv = gat_sidebar_get_instance_private(self);
 
-        /* By default we're not scrollable */
-        gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(self),
-                GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-
         /* We add items to a vertical box */
-        body = gtk_list_box_new();
-        gtk_list_box_set_header_func(GTK_LIST_BOX(body), update_header,
+        gtk_list_box_set_header_func(GTK_LIST_BOX(self), update_header,
                 self, NULL);
-        gtk_list_box_set_sort_func(GTK_LIST_BOX(body), sort_list,
+        gtk_list_box_set_sort_func(GTK_LIST_BOX(self), sort_list,
                 self, NULL);
-        gtk_container_add(GTK_CONTAINER(self), body);
-        self->priv->body = body;
 
-        style = gtk_widget_get_style_context(body);
+        style = gtk_widget_get_style_context(GTK_WIDGET(self));
         gtk_style_context_add_class(style, "sidebar");
 
         /* Store this for later abuse */
@@ -218,7 +209,7 @@ static void gat_sidebar_init(GatSidebar *self)
                 g_direct_equal, NULL, cleanup_val);
 
         /* Enable switching pages with us. */
-        self->priv->active_id = g_signal_connect(self->priv->body,
+        self->priv->active_id = g_signal_connect(self,
                 "row-activated", G_CALLBACK(row_activated), self);
 }
 
@@ -295,7 +286,7 @@ static void child_cb(GtkWidget *widget,
                         meta->title = title;
                 }
         } else if (g_str_equal(prop->name, "position")) {
-                gtk_list_box_invalidate_sort(GTK_LIST_BOX(self->priv->body));
+                gtk_list_box_invalidate_sort(GTK_LIST_BOX(self));
         }
 }
 
@@ -339,7 +330,7 @@ static void add_cb(GtkContainer *container,
         g_object_set_data(G_OBJECT(item), "gat-meta", meta);
         g_hash_table_insert(self->priv->table, widget, meta);
 
-        gtk_container_add(GTK_CONTAINER(self->priv->body), row);
+        gtk_container_add(GTK_CONTAINER(self), row);
 }
 
 static void remove_cb(GtkContainer *container,
@@ -380,10 +371,10 @@ static void visible_cb(GtkWidget *widget,
                 return;
         }
         /* Lets not force a chain here */
-        g_signal_handler_block(self->priv->body, self->priv->active_id);
-        gtk_list_box_select_row(GTK_LIST_BOX(self->priv->body),
+        g_signal_handler_block(self, self->priv->active_id);
+        gtk_list_box_select_row(GTK_LIST_BOX(self),
                 GTK_LIST_BOX_ROW(item->sidebar_row));
-        g_signal_handler_unblock(self->priv->body, self->priv->active_id);
+        g_signal_handler_unblock(self, self->priv->active_id);
 }
 
 static void rebuild_stack(GatSidebar *self)

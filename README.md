@@ -11,6 +11,13 @@ As the project continues, you may wish to keep track of the "sloccount"
 of the `src/` directory. This will give a good indication of how much work
 each developer is saved from each time :)
 
+
+** NOTE **:
+I am in the process of upstreaming this work. I hope that GatSidebar will
+appear in GTK+ 3.15 under a yet-to-be-decided name. Further discussion needs
+to happen with upstream first on "profiled" windows, i.e.  specific view types,
+like the SidebarWindow
+
 Stability
 ------
 Not at a point where this is even being considered yet. Note however

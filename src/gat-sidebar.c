@@ -166,7 +166,7 @@ static gint sort_list(GtkListBoxRow *row1,
         }
         return 1;
 }
-static void row_activated(GtkListBox *box,
+static void row_selected(GtkListBox *box,
                           GtkListBoxRow *row,
                           gpointer userdata)
 {
@@ -210,7 +210,7 @@ static void gat_sidebar_init(GatSidebar *self)
 
         /* Enable switching pages with us. */
         self->priv->active_id = g_signal_connect(self,
-                "row-activated", G_CALLBACK(row_activated), self);
+                "row-selected", G_CALLBACK(row_selected), self);
 }
 
 static void gat_sidebar_dispose(GObject *object)
